@@ -31,7 +31,8 @@ const dependencies = [
   'react-bootstrap',
   'react-router',
   'react-router-bootstrap',
-  'velocity-react'
+  'velocity-react',
+  '@schibstedspain/rosetta'
 ];
 
 /*

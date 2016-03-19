@@ -1,0 +1,8 @@
+<rt-require dependency="../Navbar/Navbar" as="Navbar"/>
+
+<div>
+    <Navbar />
+    <main class='main'>
+        {this.props.children}
+    </main>
+</div>
