@@ -119,6 +119,9 @@ gulp.task('browserify-watch', ['browserify-vendor','rt'], () => {
   bundler.external(dependencies);
   bundler.transform(babelify, { presets: ['es2015', 'react'] })
   bundler.on('update', rebundle);
+  //watching for rt
+  gulp.watch('app/components/**/*.rt', ['rt'], rebundle);
+  
   return rebundle();
 
   function rebundle() {
@@ -205,7 +208,6 @@ gulp.task('serve', ['styles','fonts','copy','vendor', 'browserify-watch'], funct
 
     gulp.watch('app/stylesheets/**/*.sass', ['styles']);
 });
-
 
 
 gulp.task('default', ['serve']);
