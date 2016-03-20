@@ -5,6 +5,7 @@ import source from 'vinyl-source-stream';
 import babelify from 'babelify';
 import browserify from 'browserify';
 import watchify from 'watchify';
+import browserSync from 'browser-sync';
 const plugins = gulpLoadPlugins({
   rename:{
     'gulp-util': 'util',
@@ -34,6 +35,7 @@ const dependencies = [
   'velocity-react',
   '@schibstedspain/rosetta'
 ];
+
 
 /*
  |--------------------------------------------------------------------------
@@ -135,7 +137,8 @@ gulp.task('browserify-watch', ['browserify-vendor','rt'], () => {
       .pipe(plugins.size({
         title: "App Bundle"
       }))
-      .pipe(plugins.notify("App Bundle done!"));
+      .pipe(plugins.notify("App Bundle done!"))
+      .pipe(browserSync.stream());
   }
 });
 
@@ -190,12 +193,20 @@ gulp.task('styles', () => {
     .pipe(plugins.size({
       title:"Styles"
     }))
+    .pipe(browserSync.stream());
 });
 
-gulp.task('watch', () => {
-  gulp.watch('app/stylesheets/**/*.sass', ['styles']);
+// Static Server + watching scss/html files
+gulp.task('serve', ['styles','fonts','copy','vendor', 'browserify-watch'], function() {
+
+    browserSync.init({
+        server: "./public"
+    });
+
+    gulp.watch('app/stylesheets/**/*.sass', ['styles']);
 });
 
 
-gulp.task('default', ['styles','fonts','copy','vendor', 'browserify-watch', 'watch']);
+
+gulp.task('default', ['serve']);
 gulp.task('build', ['styles', 'fonts','copy','vendor', 'browserify']);
