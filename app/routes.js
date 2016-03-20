@@ -2,6 +2,7 @@ import React from 'react';
 import {Route,IndexRoute} from 'react-router';
 import App from './components/App/App';
 import Home from './components/Home/Home';
+import Conversations from './components/Conversations/Conversations'
 
 const AppRouter = (props, context) => {
   context.i18n.culture = 'en';
@@ -15,5 +16,7 @@ AppRouter.contextTypes = {
 export default (
   <Route path='/' component={AppRouter}>
     <IndexRoute  component={Home} />
+    <Route path='conversations' component={Conversations} />
+    
   </Route> 
 );

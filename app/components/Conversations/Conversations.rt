@@ -1,0 +1,9 @@
+<rt-require dependency="react-bootstrap/lib/ListGroup" as="ListGroup"/>
+<rt-require dependency="react-bootstrap/lib/ListGroupItem" as="ListGroupItem"/>
+<rt-require dependency="react-loader" as="Loader" />
+
+<Loader loaded="{this.state.loading}" color='#bf5a16' top="50%" left="50%" scale={1.00} width={10}>
+    <ListGroup>
+        <ListGroupItem rt-repeat="conversation in this.state.conversations" key='{conversationIndex}' header="{conversation.title}">Tiene {conversation.messages ? conversation.messages.length : 0 } mensajes </ListGroupItem>
+    </ListGroup>
+</Loader>

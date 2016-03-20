@@ -2,7 +2,7 @@
     
     "conversations":[
         {
-            "name": "Hola esto es una prueba",
+            "title": "Conversación 1",
             "messages":[
                 {
                     "id": 123456,
@@ -12,6 +12,12 @@
                     "id": 123457,
                     "text": "Hola que tal 2"
                 }
+            ]
+        },
+        {
+            "title": "Conversación 2",
+            "messages":[
+                
             ]
         }
     ]
