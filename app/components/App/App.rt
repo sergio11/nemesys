@@ -1,8 +1,15 @@
 <rt-require dependency="../Navbar/Navbar" as="Navbar"/>
+<rt-require dependency="react-router-transition" as="{RouteTransition}" />
 
 <div>
     <Navbar />
-    <main class='main'>
+    <RouteTransition
+        component="main"
+        pathname="{this.props.location.pathname}"
+        atEnter="{{ translateX: -100, opacity: .7 }}"
+        atLeave="{{ translateX: 100, opacity: 0 }}"
+        atActive="{{ translateX: 0, opacity: 1}}"
+        mapStyles="{styles => ({ opacity: styles.opacity, transform: `translateX(${styles.translateX}%)` })}">
         {this.props.children}
-    </main>
+    </RouteTransition>
 </div>
