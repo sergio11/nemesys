@@ -21,6 +21,6 @@
     "tests"
   ],
   "dependencies": {
-    "bootswatch-scss": "^3.2.0"
+    "bootstrap-sass": "^3.3.6"
   }
 }

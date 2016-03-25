@@ -1,5 +1,14 @@
 {
-    
+    "usuarios":[
+        
+    ],
+    "seguidores":[
+      {
+          "following": "3123213123",
+          "follower": "321321312321",
+          "date": ""
+      }  
+    ],
     "conversations":[
         {
             "title": "Conversación 1",
