@@ -32,7 +32,7 @@ const dependencies = [
   'react-bootstrap',
   'react-router',
   'react-router-bootstrap',
-  'velocity-react',
+  'react-router-transition',
   '@schibstedspain/rosetta'
 ];
 
@@ -172,7 +172,7 @@ gulp.task('copy', () => {
 */
 
 gulp.task('fonts', () => {
-  return gulp.src('bower_components/bootstrap-sass-official/assets/fonts/**')
+  return gulp.src('bower_components/bootstrap-sass/assets/fonts/**')
     .pipe(gulp.dest('public/fonts/'))
     .pipe(plugins.size({
       title:"Fonts"
