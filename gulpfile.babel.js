@@ -45,6 +45,8 @@ const dependencies = [
 gulp.task('vendor', () => {
   return gulp.src([
     'bower_components/jquery/dist/jquery.js',
+    'app/assets/material.min.js',
+    'app/assets/material-kit.js'
   ]).pipe(plugins.concat('vendor.js'))
     .pipe(plugins.if(production, plugins.uglify({ mangle: false })))
     .pipe(gulp.dest('public/js'))

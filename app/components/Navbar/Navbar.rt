@@ -5,7 +5,7 @@
 <rt-require dependency="react-bootstrap/lib/MenuItem" as="MenuItem"/>
 <rt-require dependency="react-router-bootstrap/lib/LinkContainer" as="LinkContainer"/>
 
-<Navbar inverse>
+<Navbar fixedTop>
     <Navbar.Header>
         <Navbar.Brand>
             <a href="#">React-Bootstrap</a>
