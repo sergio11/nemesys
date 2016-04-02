@@ -1,0 +1,35 @@
+<rt-require dependency="react-bootstrap/lib/Grid" as="Grid" />
+<rt-require dependency="react-bootstrap/lib/Row" as="Row" />
+<rt-require dependency="react-bootstrap/lib/Col" as="Col" />
+<rt-require dependency="react-bootstrap/lib/Alert" as="Alert" />
+
+
+<div class="signup-page">
+    <div class="wrapper">
+        <div class="header header-filter" style="background-image: url('./img/portada.jpg'); background-size: cover; background-position: top center;">
+            <Grid>
+                <Row> 
+                    <Col md={4} mdOffset={4} sm={6} smOffset={3}>
+                        <div class="card card-signup">
+                            <Alert rt-if="this.props.authData" bsStyle="info">
+                                <div class="alert-icon">
+                                    <i class="material-icons">info_outline</i>
+                                </div>
+                                <span>Cerrando sesión, espere un momento</span>
+                            </Alert>
+                            <Alert rt-if="!this.props.authData" bsStyle="success">
+                                <div class="alert-icon">
+                                    <i class="material-icons">info_outline</i>
+                                </div>
+                                <span>Sesión Cerrada con éxito</span>
+                            </Alert>
+                         </div>
+                    </Col>
+                </Row>
+             </Grid>
+         </div>
+     </div>
+</div>
+
+
+

@@ -2,14 +2,14 @@
 <rt-require dependency="react-router-transition" as="{RouteTransition}" />
 
 <div>
-    <Navbar />
+    <Navbar authData="{this.state.auth_data}"/>
     <RouteTransition
         component="main"
         pathname="{this.props.location.pathname}"
-        atEnter="{{ translateX: -100, opacity: .7 }}"
-        atLeave="{{ translateX: 100, opacity: 0 }}"
-        atActive="{{ translateX: 0, opacity: 1}}"
-        mapStyles="{styles => ({ opacity: styles.opacity, transform: `translateX(${styles.translateX}%)` })}">
-        {this.props.children}
+        atEnter="{{ translateX: -100}}"
+        atLeave="{{ translateX: 100}}"
+        atActive="{{ translateX: 0}}"
+        mapStyles="{styles => ({transform: `translateX(${styles.translateX}%)` })}">
+        {React.cloneElement(this.props.children, {'authData': this.state.auth_data })}
     </RouteTransition>
 </div>

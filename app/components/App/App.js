@@ -9,11 +9,13 @@ class App extends React.Component{
     constructor(props,context){
         super(props,context);
         this.i18n = context.i18n;
+        this.state = {
+            auth_data: null
+        }
     }
     
     _onAuthCallback(authData){
-        console.log("Auth Data");
-        console.log(authData);
+        this.setState({auth_data: authData});
     }
     
     componentDidMount(){
@@ -21,7 +23,7 @@ class App extends React.Component{
         //browserHistory.push();
         console.log(authData);
         //listen to auth user change
-        Firebase.onAuth(this._onAuthCallback);
+        Firebase.onAuth(this._onAuthCallback.bind(this));
     }
     
     render(){

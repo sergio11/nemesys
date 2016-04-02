@@ -47,7 +47,8 @@ class Login extends React.Component{
         let message;
         switch(error.code){
             case 'INVALID_USER':
-                message = this.i18n.t("login.errors.invalid_user");
+            case 'INVALID_PASSWORD':
+                message = this.i18n.t("login.errors.user_or_password_invalid");
                 break;
         }
         console.log("Error");
@@ -58,6 +59,10 @@ class Login extends React.Component{
     _onChange(e){
         let key = e.target.name, value = e.target.value;
         this.state[key] = value;
+    }
+    
+    componentDidMount(){
+        $.material.init();
     }
 
     render(){

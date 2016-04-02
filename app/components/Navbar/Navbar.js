@@ -2,11 +2,16 @@
 import React from 'react';
 import Template from './Navbar.rt.js';
 
-class Navbar extends React.Component{
+class Navbar extends React.Component {
     
     constructor(props,context){
         super(props,context);
         this.i18n = context.i18n;
+       
+    }
+    
+    componentDidMount(){
+         console.log("Email del usuario: ", this.props);
     }
     
     render(){

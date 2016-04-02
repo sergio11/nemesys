@@ -3,6 +3,7 @@
 <rt-require dependency="react-bootstrap/lib/NavItem" as="NavItem"/>
 <rt-require dependency="react-bootstrap/lib/NavDropdown" as="NavDropdown"/>
 <rt-require dependency="react-bootstrap/lib/MenuItem" as="MenuItem"/>
+<rt-require dependency="react-bootstrap/lib/DropdownButton" as="DropdownButton" />
 <rt-require dependency="react-router-bootstrap/lib/LinkContainer" as="LinkContainer"/>
 
 <Navbar fixedTop>
@@ -13,7 +14,7 @@
         <Navbar.Toggle />
     </Navbar.Header>
     <Navbar.Collapse>
-        <Nav>
+        <Nav rt-if="this.props.authData">
             <LinkContainer to="{{ pathname: '/'}}">
                 <NavItem eventKey={1} href="#">{this.i18n.t('navbar.home')}</NavItem>
             </LinkContainer>
@@ -21,9 +22,19 @@
                 <NavItem eventKey={2} href="#">{this.i18n.t('navbar.conversations')}</NavItem>
             </LinkContainer>
         </Nav>
-        <Nav pullRight>
-            <NavItem eventKey={1} href="#">Link Right</NavItem>
-            <NavItem eventKey={2} href="#">Link Right</NavItem>
+        <Nav pullRight rt-if="!this.props.authData">
+            <LinkContainer to="{{ pathname: '/login'}}">
+                <NavItem eventKey={1} href="#">{this.i18n.t('navbar.login')}</NavItem>
+            </LinkContainer>
+            <LinkContainer to="{{ pathname: '/signup'}}">
+                <NavItem eventKey={2} href="#">{this.i18n.t('navbar.signup')}</NavItem>
+            </LinkContainer>
         </Nav>
-    </Navbar.Collapse>
+        <Nav pullRight rt-if="this.props.authData">
+            <DropdownButton id="user-dropdown-button" title="{this.props.authData.password.email}" key={1} >
+                <LinkContainer to="{{ pathname: '/logout'}}">
+                    <MenuItem eventKey={2} >Logout</MenuItem>
+                </LinkContainer>
+            </DropdownButton>
+        </Navbar.Collapse>
 </Navbar>

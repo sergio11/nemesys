@@ -2,7 +2,9 @@ export default {
   'es': {
       'navbar':{
           'home': 'Home',
-          'conversations': 'Conversaciones'
+          'conversations': 'Conversaciones',
+          'signup': 'Registrarse',
+          'login': 'Iniciar Sesión'
       },
       'login':{
           'title': 'Iniciar Sesión',
@@ -10,14 +12,21 @@ export default {
           'enter': 'Entrar',
           'fail_title': 'Fallo al iniciar sesión',
           'errors': {
-              'invalid_user': 'Usuario o contraseña no válidos'
+              'user_or_password_invalid': 'Usuario o contraseña no válidos'
           }
+      },
+      'signup':{
+          'title': 'Regístrate',
+          'other': 'o sea clásico',
+          'submit': 'Resgistrarme',
       }
   },
   'en': {
       'navbar':{
           'home': 'Home',
-          'conversations': 'Conversations'
+          'conversations': 'Conversations',
+          'signup': 'Sign Up',
+          'login': 'Login'
       },
       'login':{
           'title': 'Login',
@@ -25,8 +34,13 @@ export default {
           'enter': 'Enter',
           'fail_title': 'Failed to login',
           'errors': {
-              'invalid_user': 'Invalid user or password'
+              'user_or_password_invalid': 'Invalid user or password'
           }
+      },
+      'signup':{
+          'title': 'Sign up',
+          'other': 'Or Be Classical',
+          'submit': 'Check in',
       }
   }
 };
