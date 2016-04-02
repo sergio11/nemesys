@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import { RouteTransition } from 'react-router-transition';
 export default function () {
-    return React.createElement('div', {}, React.createElement(Navbar, { 'authData': this.state.auth_data }), React.createElement(RouteTransition, {
+    return React.createElement('div', {}, React.createElement(Navbar, { 'user': this.state.user }), React.createElement(RouteTransition, {
         'component': 'main',
         'pathname': this.props.location.pathname,
         'atEnter': { translateX: -100 },
@@ -25,5 +25,5 @@ export default function () {
         'mdOffset': 4,
         'sm': 6,
         'smOffset': 3
-    }, React.createElement('div', { 'className': 'card card-signup' }, '\r\n                                    ', React.cloneElement(this.props.children, { 'authData': this.state.auth_data }), '\r\n                                ')))))))));
+    }, React.createElement('div', { 'className': 'card card-signup' }, '\r\n                                    ', React.cloneElement(this.props.children, { 'user': this.state.user }), '\r\n                                ')))))))));
 };

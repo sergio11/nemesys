@@ -4,7 +4,9 @@ export default {
           'home': 'Home',
           'conversations': 'Conversaciones',
           'signup': 'Registrarse',
-          'login': 'Iniciar Sesión'
+          'login': 'Iniciar Sesión',
+          'logout': 'Salir',
+          'changePass': 'Cambiar Contraseña'
       },
       'login':{
           'title': 'Iniciar Sesión',
@@ -38,7 +40,9 @@ export default {
           'home': 'Home',
           'conversations': 'Conversations',
           'signup': 'Sign Up',
-          'login': 'Login'
+          'login': 'Login',
+          'logout': 'Logout',
+          'changePass': 'Change Password'
       },
       'login':{
           'title': 'Login',

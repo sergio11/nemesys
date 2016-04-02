@@ -3,7 +3,6 @@
 <rt-require dependency="react-bootstrap/lib/Glyphicon" as="Glyphicon"/>
 <rt-require dependency="react-bootstrap/lib/Alert" as="Alert" />
 
-
 <div>
     <form class="form" onSubmit='{this._onSubmit.bind(this)}'>
         <div class="header header-primary text-center">

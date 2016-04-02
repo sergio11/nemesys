@@ -4,9 +4,8 @@
 <rt-require dependency="react-bootstrap/lib/Col" as="Col" />
 <rt-require dependency="react-router-transition" as="{RouteTransition}" />
 
-
 <div>
-    <Navbar authData="{this.state.auth_data}"/>
+    <Navbar user="{this.state.user}"/>
     <RouteTransition
         component="main"
         pathname="{this.props.location.pathname}"
@@ -21,7 +20,7 @@
                         <Row> 
                             <Col md={4} mdOffset={4} sm={6} smOffset={3}>
                                 <div class="card card-signup">
-                                    {React.cloneElement(this.props.children, {'authData': this.state.auth_data })}
+                                    {React.cloneElement(this.props.children, {'user': this.state.user })}
                                 </div>
                             </Col>
                         </Row>

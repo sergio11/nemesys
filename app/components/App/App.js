@@ -10,12 +10,27 @@ class App extends React.Component{
         super(props,context);
         this.i18n = context.i18n;
         this.state = {
-            auth_data: null
+            user: null
         }
     }
     
     _onAuthCallback(authData){
-        this.setState({auth_data: authData});
+        if(authData){
+            Firebase.fetch('users', {
+                context: this,
+                asArray: true,
+                queries: {
+                    orderByChild: 'uid',
+                    equalTo: authData.uid
+                },
+                then: (user) => {
+                    this.setState({user: user ? user[0] : null});
+                }
+            });
+        }else{
+            this.setState({user: null});
+        }
+        
     }
     
     componentDidMount(){

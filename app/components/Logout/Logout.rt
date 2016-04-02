@@ -4,14 +4,13 @@
 <rt-require dependency="react-bootstrap/lib/Alert" as="Alert" />
 
 <div>
-    <Alert rt-if="this.props.authData" bsStyle="info">
+    <Alert rt-if="this.props.user" bsStyle="info">
         <div class="alert-icon">
             <i class="material-icons">info_outline</i>
         </div>
         <span>Cerrando sesión, espere un momento</span>
     </Alert>
-
-    <Alert rt-if="!this.props.authData" bsStyle="success">
+    <Alert rt-if="!this.props.user" bsStyle="success">
         <div class="alert-icon">
             <i class="material-icons">info_outline</i>
         </div>
