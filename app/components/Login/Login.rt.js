@@ -1,8 +1,5 @@
 import React from 'react/addons';
 import _ from 'lodash';
-import Grid from 'react-bootstrap/lib/Grid';
-import Row from 'react-bootstrap/lib/Row';
-import Col from 'react-bootstrap/lib/Col';
 import Input from 'react-bootstrap/lib/Input';
 import ButtonInput from 'react-bootstrap/lib/ButtonInput';
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
@@ -12,19 +9,7 @@ function scopeMessage1() {
     return React.createElement(Alert, { 'bsStyle': 'danger' }, React.createElement('h4', {}, this.i18n.t('login.fail_title')), React.createElement('p', {}, message));
 }
 export default function () {
-    return React.createElement('div', { 'className': 'signup-page' }, React.createElement('div', { 'className': 'wrapper' }, React.createElement('div', {
-        'className': 'header header-filter',
-        'style': {
-            backgroundImage: 'url(\'./img/portada.jpg\')',
-            backgroundSize: 'cover',
-            backgroundPosition: 'top center'
-        }
-    }, React.createElement(Grid, {}, React.createElement(Row, {}, React.createElement(Col, {
-        'md': 4,
-        'mdOffset': 4,
-        'sm': 6,
-        'smOffset': 3
-    }, React.createElement('div', { 'className': 'card card-signup' }, React.createElement('form', {
+    return React.createElement('div', {}, React.createElement('form', {
         'className': 'form',
         'onSubmit': this._onSubmit.bind(this)
     }, React.createElement('div', { 'className': 'header header-primary text-center' }, React.createElement('h4', {}, this.i18n.t('login.title')), React.createElement('div', { 'className': 'social-line' }, React.createElement('a', {
@@ -53,8 +38,5 @@ export default function () {
         'className': 'btn-raised',
         'value': this.i18n.t('login.enter'),
         'bsStyle': 'primary'
-    }))))), React.createElement(Col, {
-        'xs': 8,
-        'smOffset': 2
-    }, this.state.authFail ? scopeMessage1.apply(this, []) : null))))));
+    }))), this.state.authFail ? scopeMessage1.apply(this, []) : null);
 };

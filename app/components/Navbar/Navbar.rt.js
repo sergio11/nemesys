@@ -24,5 +24,5 @@ export default function () {
         'id': 'user-dropdown-button',
         'title': this.props.authData.password.email,
         'key': 1
-    }, React.createElement(LinkContainer, { 'to': { pathname: '/logout' } }, React.createElement(MenuItem, { 'eventKey': 2 }, 'Logout')))) : null));
+    }, React.createElement(LinkContainer, { 'to': { pathname: '/logout' } }, React.createElement(MenuItem, { 'eventKey': 2 }, 'Logout')), React.createElement(LinkContainer, { 'to': { pathname: '/change-password' } }, React.createElement(MenuItem, { 'eventKey': 3 }, 'Change Password')))) : null));
 };

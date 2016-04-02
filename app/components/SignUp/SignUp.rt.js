@@ -1,27 +1,12 @@
 import React from 'react/addons';
 import _ from 'lodash';
-import Grid from 'react-bootstrap/lib/Grid';
-import Row from 'react-bootstrap/lib/Row';
-import Col from 'react-bootstrap/lib/Col';
 import Input from 'react-bootstrap/lib/Input';
 import ButtonInput from 'react-bootstrap/lib/ButtonInput';
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import Alert from 'react-bootstrap/lib/Alert';
 import DatePicker from 'react-bootstrap-date-picker';
 export default function () {
-    return React.createElement('div', { 'className': 'signup-page' }, React.createElement('div', { 'className': 'wrapper' }, React.createElement('div', {
-        'className': 'header header-filter',
-        'style': {
-            backgroundImage: 'url(\'./img/portada.jpg\')',
-            backgroundSize: 'cover',
-            backgroundPosition: 'top center'
-        }
-    }, React.createElement(Grid, {}, React.createElement(Row, {}, React.createElement(Col, {
-        'md': 4,
-        'mdOffset': 4,
-        'sm': 6,
-        'smOffset': 3
-    }, React.createElement('div', { 'className': 'card card-signup' }, React.createElement('form', {
+    return React.createElement('form', {
         'className': 'form',
         'onSubmit': this._createUser.bind(this)
     }, React.createElement('div', { 'className': 'header header-primary text-center' }, React.createElement('h4', {}, this.i18n.t('signup.title')), React.createElement('div', { 'className': 'social-line' }, React.createElement('a', {
@@ -68,5 +53,5 @@ export default function () {
         'className': 'btn-raised',
         'value': this.i18n.t('signup.submit'),
         'bsStyle': 'primary'
-    }))))))))));
+    })));
 };

@@ -19,6 +19,18 @@ export default {
           'title': 'Regístrate',
           'other': 'o sea clásico',
           'submit': 'Resgistrarme',
+      },
+      'changepassword':{
+          'title': 'Cambiar Contraseña',
+          'enter': 'Cambiar',
+          'success': {
+              'title': 'Contraseña contraseña',
+              'message': 'La contraseña fue cambiada con éxito'
+          },
+          'error': {
+              'title': 'Fallo al cambiar la contraseña',
+              'message': 'Se ha producido un error al intentar cambiar la contraseña'
+          }
       }
   },
   'en': {
@@ -41,6 +53,18 @@ export default {
           'title': 'Sign up',
           'other': 'Or Be Classical',
           'submit': 'Check in',
+      },
+      'changepassword':{
+          'title': 'Change Password',
+          'enter': 'Change',
+          'success': {
+              'title': 'Password Changed',
+              'message': 'The password was changed succesfully!'
+          },
+          'error': {
+              'title': 'Failed to change password',
+              'message': 'An error occurred while trying to change the password'
+          }
       }
   }
 };

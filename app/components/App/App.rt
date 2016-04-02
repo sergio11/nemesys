@@ -1,5 +1,9 @@
 <rt-require dependency="../Navbar/Navbar" as="Navbar"/>
+<rt-require dependency="react-bootstrap/lib/Grid" as="Grid" />
+<rt-require dependency="react-bootstrap/lib/Row" as="Row" />
+<rt-require dependency="react-bootstrap/lib/Col" as="Col" />
 <rt-require dependency="react-router-transition" as="{RouteTransition}" />
+
 
 <div>
     <Navbar authData="{this.state.auth_data}"/>
@@ -10,6 +14,20 @@
         atLeave="{{ translateX: 100}}"
         atActive="{{ translateX: 0}}"
         mapStyles="{styles => ({transform: `translateX(${styles.translateX}%)` })}">
-        {React.cloneElement(this.props.children, {'authData': this.state.auth_data })}
+        <div class="signup-page">
+            <div class="wrapper">
+                <div class="header header-filter" style="background-image: url('./img/portada.jpg'); background-size: cover; background-position: top center;">
+                    <Grid>
+                        <Row> 
+                            <Col md={4} mdOffset={4} sm={6} smOffset={3}>
+                                <div class="card card-signup">
+                                    {React.cloneElement(this.props.children, {'authData': this.state.auth_data })}
+                                </div>
+                            </Col>
+                        </Row>
+                     </Grid>
+                  </div>
+             </div>
+        </div>   
     </RouteTransition>
 </div>

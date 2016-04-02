@@ -30,11 +30,17 @@
                 <NavItem eventKey={2} href="#">{this.i18n.t('navbar.signup')}</NavItem>
             </LinkContainer>
         </Nav>
+        
         <Nav pullRight rt-if="this.props.authData">
+        
             <DropdownButton id="user-dropdown-button" title="{this.props.authData.password.email}" key={1} >
                 <LinkContainer to="{{ pathname: '/logout'}}">
                     <MenuItem eventKey={2} >Logout</MenuItem>
                 </LinkContainer>
+                <LinkContainer to="{{ pathname: '/change-password'}}">
+                    <MenuItem eventKey={3} >Change Password</MenuItem>
+                </LinkContainer>
+                
             </DropdownButton>
         </Navbar.Collapse>
 </Navbar>

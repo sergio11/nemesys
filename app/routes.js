@@ -4,6 +4,7 @@ import App from './components/App/App';
 import Login from './components/Login/Login';
 import Logout from './components/Logout/Logout';
 import SignUp from './components/SignUp/SignUp';
+import ChangePassword from './components/ChangePassword/ChangePassword';
 import Home from './components/Home/Home';
 import Conversations from './components/Conversations/Conversations'
 
@@ -23,6 +24,7 @@ export default (
     <Route path='login' component={Login} />
     <Route path='signup' component={SignUp} />
     <Route path='logout' component={Logout} />
+    <Route path='change-password' component={ChangePassword} />
     <Route path='home'  component={Home} />
   </Route> 
 );
