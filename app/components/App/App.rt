@@ -13,20 +13,20 @@
         atLeave="{{ translateX: 100}}"
         atActive="{{ translateX: 0}}"
         mapStyles="{styles => ({transform: `translateX(${styles.translateX}%)` })}">
-        <div class="signup-page">
-            <div class="wrapper">
-                <div class="header header-filter" style="background-image: url('./img/portada.jpg'); background-size: cover; background-position: top center;">
-                    <Grid>
-                        <Row> 
-                            <Col md={4} mdOffset={4} sm={6} smOffset={3}>
-                                <div class="card card-signup">
+            <div class="signup-page">
+                <div class="wrapper">
+                    <div class="header header-filter" style="background-image: url('./img/portada.jpg'); background-size: cover; background-position: top center;">
+                        <Grid>
+                            <Row> 
+                                <Col md={4} mdOffset={4} sm={6} smOffset={3}>
+                                    <div class="card card-signup">
                                     {React.cloneElement(this.props.children, {'user': this.state.user })}
-                                </div>
-                            </Col>
-                        </Row>
-                     </Grid>
-                  </div>
-             </div>
-        </div>   
-    </RouteTransition>
+                                    </div>
+                                </Col>
+                            </Row>
+                        </Grid>
+                    </div>    
+                </div>
+            </div>
+     </RouteTransition>   
 </div>

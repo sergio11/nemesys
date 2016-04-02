@@ -25,5 +25,5 @@ export default function () {
         'mdOffset': 4,
         'sm': 6,
         'smOffset': 3
-    }, React.createElement('div', { 'className': 'card card-signup' }, '\r\n                                    ', React.cloneElement(this.props.children, { 'user': this.state.user }), '\r\n                                ')))))))));
+    }, React.createElement('div', { 'className': 'card card-signup' }, '\r\n                                    ', React.cloneElement(this.props.children, { 'user': this.state.user }), '\r\n                                    ')))))))));
 };
