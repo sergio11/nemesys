@@ -3,6 +3,7 @@ from nemesys.core.metasploit_client import MetasploitClient
 from nemesys.core.privilege_escalation_manager import PrivilegeEscalationManager
 from nemesys.core.session_manager import SessionManager
 from nemesys.core.shell_interface import ShellInterface
+from nemesys.core.system_enumerator import SystemEnumerator
 from nemesys.utils.logger import nemesysLogger
 from nemesys import __version__
 
@@ -31,6 +32,7 @@ class Nemesys:
         self.session_manager = SessionManager(self.client)
         self.shell_interface = ShellInterface(self.client, timeout=self.timeout)
         self.privilege_escalation_manager = PrivilegeEscalationManager(self.client)
+        self.system_enumerator = SystemEnumerator(self.client)
 
     def run_attack(self, exploit_name, payload_name, exploit_options={}, payload_options={}, privilege_escalation_exploit=None, target=None):
         """
@@ -64,6 +66,7 @@ class Nemesys:
                         new_session_id = self.privilege_escalation_manager.run(new_session_id, privilege_escalation_exploit, target)
                         if new_session_id:
                             self.session_manager.list_sessions()
+                    self.system_enumerator.enumerate_system(new_session_id)
                     # Open interactive shell for further post-exploitation
                     self.shell_interface.open_shell(new_session_id)
                 else:

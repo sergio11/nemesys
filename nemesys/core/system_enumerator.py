@@ -18,7 +18,7 @@ class SystemEnumerator:
         timeout: Timeout duration for waiting for command execution results (in seconds).
     """
 
-    def __init__(self, client, timeout=30):
+    def __init__(self, client, timeout=10):
         """
         Initializes the SystemEnumerator class.
 
@@ -29,7 +29,7 @@ class SystemEnumerator:
         self.client = client
         self.timeout = timeout
 
-    def _enumerate_system(self, session_id):
+    def enumerate_system(self, session_id):
         """
         Performs the enumeration of the victim's system by running various commands to gather critical 
         system information.
@@ -168,12 +168,10 @@ class SystemEnumerator:
         Returns:
             str: The output of the command execution.
         """
-        shell = self.client.sessions.session(session_id)
+        shell = self.client.sessions.session(str(session_id))
         shell.write(command + '\n')
-        time.sleep(self.timeout)  # Uses the timeout value set in the constructor
+        time.sleep(self.timeout)
         output = shell.read()
-        logger.info(f"Executed command: {command}\n")
-        logger.info(f"Output: {output}\n")
         if output:
             log_file.write(f"Executed command: {command}\n")
             log_file.write(f"Output: {output}\n\n")
