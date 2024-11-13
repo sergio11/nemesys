@@ -3,7 +3,7 @@ from nemesys.core.metasploit_client import MetasploitClient
 from nemesys.core.privilege_escalation_manager import PrivilegeEscalationManager
 from nemesys.core.session_manager import SessionManager
 from nemesys.core.shell_interface import ShellInterface
-from utils.logger import nemesysLogger
+from nemesys.utils.logger import nemesysLogger
 from nemesys import __version__
 
 class Nemesys:
@@ -56,11 +56,14 @@ class Nemesys:
             session_id = self.session_manager.get_session_id(exploit_uuid)
             if session_id:
                 # Upgrade session
-                new_session_id = self.session_manager.upgrade_session(int(session_id))
+                new_session_id = self.session_manager.upgrade_session(session_id)
                 if new_session_id:
+                    self.session_manager.list_sessions()
                     # Perform privilege escalation if exploit provided
                     if privilege_escalation_exploit and target:
                         new_session_id = self.privilege_escalation_manager.run(new_session_id, privilege_escalation_exploit, target)
+                        if new_session_id:
+                            self.session_manager.list_sessions()
                     # Open interactive shell for further post-exploitation
                     self.shell_interface.open_shell(new_session_id)
                 else:

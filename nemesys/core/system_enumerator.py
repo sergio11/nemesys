@@ -2,8 +2,7 @@ import re
 import shlex
 import subprocess
 import time
-from venv import logger
-from utils.logger import nemesysLogger
+from nemesys.utils.logger import nemesysLogger
 import datetime
 
 class SystemEnumerator:

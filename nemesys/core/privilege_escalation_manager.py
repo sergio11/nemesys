@@ -1,6 +1,6 @@
 import re
 import time
-from utils.logger import nemesysLogger
+from nemesys.utils.logger import nemesysLogger
 
 class PrivilegeEscalationManager:
     """
@@ -50,7 +50,7 @@ class PrivilegeEscalationManager:
             current_console.write(f'set RHOSTS {target}\n')
 
             nemesysLogger.info("💉 [PAYLOAD] Injecting malicious code into the system veins...")
-            current_console.console(console_id).write('run\n')
+            current_console.write('run\n')
 
             # Wait for the exploit to take effect
             time.sleep(self.timeout)

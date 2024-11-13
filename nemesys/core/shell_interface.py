@@ -1,4 +1,4 @@
-from utils.logger import nemesysLogger
+from nemesys.utils.logger import nemesysLogger
 import time
 
 
