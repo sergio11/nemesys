@@ -35,8 +35,127 @@
 - ☁️ **LangChain** and **Groq** access for cloud-based LLM processing.
 - 🔑 **Root or Admin Privileges** for full functionality.
 
-## 🗒️ Logging
-All enumeration results are saved to a log file named `system_enumeration.log`, capturing details about the target system for post-exploitation analysis.
+## 🛠️ Component Breakdown
+
+Nemesys is designed with a modular architecture, where each component has a distinct responsibility, making the exploitation and post-exploitation process efficient and streamlined. Below is a detailed overview of each core component:
+
+### 1. **MetasploitClient** 🕵️‍♂️
+
+The **MetasploitClient** serves as the connection interface between Nemesys and the Metasploit RPC API.
+
+- **Responsibilities**:
+  - Establishes and manages the connection to the Metasploit RPC server.
+  - Handles secure API requests with SSL support.
+  - Provides a client object used by other components for unified Metasploit interactions.
+
+- **Integration**:
+  - Initiated during the setup of Nemesys to validate connectivity.
+  - Essential for all interactions with Metasploit modules across components.
+
+---
+
+### 2. **ExploitManager** 💥
+
+The **ExploitManager** handles the execution of exploits against target systems using Metasploit.
+
+- **Responsibilities**:
+  - Executes chosen exploit modules with specified payloads.
+  - Configures options for both exploit and payload modules (e.g., `RHOSTS`, `LPORT`).
+  - Tracks exploit attempts using UUIDs for result monitoring.
+
+- **Integration**:
+  - Triggered by the `run_attack()` method to start the exploitation phase.
+  - Passes exploit UUIDs to the **SessionManager** for session tracking.
+
+---
+
+### 3. **SessionManager** 🔄
+
+The **SessionManager** is in charge of managing sessions, including session upgrades and tracking active sessions.
+
+- **Responsibilities**:
+  - Retrieves session IDs based on the exploit UUID returned by the **ExploitManager**.
+  - Upgrades standard shell sessions to Meterpreter sessions for enhanced capabilities.
+  - Lists and manages active sessions for efficient exploitation.
+
+- **Integration**:
+  - Central to the transition between the exploitation and post-exploitation phases.
+  - Handles session upgrades automatically and tracks session IDs.
+
+---
+
+### 4. **PrivilegeEscalationManager** 🔓
+
+The **PrivilegeEscalationManager** focuses on elevating privileges after a session has been established.
+
+- **Responsibilities**:
+  - Identifies suitable privilege escalation exploits based on system information.
+  - Executes privilege escalation modules (e.g., kernel exploits) to gain elevated access.
+  - Verifies the success of privilege escalation attempts.
+
+- **Integration**:
+  - Optionally invoked in the `run_attack()` method if a privilege escalation module is specified.
+  - Collaborates with the **SystemEnumerator** to determine potential escalation paths.
+
+---
+
+### 5. **ShellInterface** 🖥️
+
+The **ShellInterface** provides an interactive shell for direct command execution on compromised targets.
+
+- **Responsibilities**:
+  - Opens an interactive shell session (Meterpreter or standard shell) for manual exploitation.
+  - Supports system command execution, script imports, and file transfers.
+  - Offers a user-friendly interface for further post-exploitation tasks.
+
+- **Integration**:
+  - Invoked at the end of the `run_attack()` process for hands-on interaction with the compromised system.
+  - Adjusts the shell type based on the session capabilities (e.g., upgraded Meterpreter session).
+
+---
+
+### 6. **SystemEnumerator** 🔍
+
+The **SystemEnumerator** is designed to gather extensive information about the compromised system for analysis.
+
+- **Responsibilities**:
+  - Collects system details such as OS version, network interfaces, installed software, and running processes.
+  - Identifies potential vulnerabilities and misconfigurations using integrated tools like `searchsploit`.
+  - Generates initial system assessment reports, aiding in further exploitation decisions.
+
+- **Integration**:
+  - Called after session establishment and upgrade to provide critical system information.
+  - Supplies data to the **PrivilegeEscalationManager** for identifying privilege escalation opportunities.
+  - Capable of generating advanced reports using **LangChain** with LLM analysis through Groq Cloud.
+
+---
+
+## 🧩 Workflow Overview
+
+The main exploitation process in Nemesys involves the following steps:
+
+1. **Initialization**:
+   - Connects to Metasploit using **MetasploitClient**.
+
+2. **Exploitation**:
+   - Executes the chosen exploit and payload using **ExploitManager**.
+   - Retrieves the session ID via **SessionManager**.
+
+3. **Session Management**:
+   - Upgrades the session for enhanced control.
+
+4. **Privilege Escalation** (Optional):
+   - Attempts privilege escalation using **PrivilegeEscalationManager**.
+
+5. **System Enumeration**:
+   - Gathers system information with **SystemEnumerator**.
+
+6. **Interactive Shell**:
+   - Provides a hands-on interactive shell through **ShellInterface** for manual exploitation.
+
+---
+
+This modular structure ensures that each component performs its role effectively, contributing to a cohesive and efficient exploitation workflow in Nemesys.
 
 ## ⚠️ Disclaimer
 **Nemesys is intended for authorized and ethical use only**. Unauthorized use may result in severe legal consequences. Always have proper authorization before using this tool on any system.
