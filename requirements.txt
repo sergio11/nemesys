@@ -1,1 +1,6 @@
 pymetasploit3==1.0.6
+langchain==0.2.16
+langchain-groq==0.1.10
+fpdf2==2.8.1
+langchain-huggingface
+faiss-cpu
