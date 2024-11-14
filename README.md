@@ -1,4 +1,4 @@
-# 💀 Nemesys: Critical Data Harvesting and Post-Exploitation Tool
+# 💀 **Nemesys**: ⚡ Critical Data Harvesting & 🛠️ Post-Exploitation Tool 🕵️‍♂️
 
 **Nemesys** is an advanced exploitation and post-exploitation automation tool built on top of the Metasploit Framework. 🛠️ Designed for penetration testers and security researchers, it streamlines the process of targeting, exploiting, and deeply enumerating vulnerable systems. With a sleek dark-themed interface and powerful automation, **Nemesys** simplifies complex exploitation workflows, providing full control and visibility over compromised systems. ⚔️
 
@@ -35,7 +35,7 @@
 - ☁️ **LangChain** and **Groq** access for cloud-based LLM processing.
 - 🔑 **Root or Admin Privileges** for full functionality.
 
-## 🛠️ Component Breakdown
+## 🔧🧩 **Component Breakdown**: 🔍 Exploring the Building Blocks of Nemesys ⚙️
 
 Nemesys is designed with a modular architecture, where each component has a distinct responsibility, making the exploitation and post-exploitation process efficient and streamlined. Below is a detailed overview of each core component:
 
