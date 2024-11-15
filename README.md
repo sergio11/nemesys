@@ -54,8 +54,6 @@ The **MetasploitClient** serves as the connection interface between Nemesys and 
   - Initiated during the setup of Nemesys to validate connectivity.
   - Essential for all interactions with Metasploit modules across components.
 
----
-
 ### 2. **ExploitManager** 💥
 
 The **ExploitManager** handles the execution of exploits against target systems using Metasploit.
@@ -68,8 +66,6 @@ The **ExploitManager** handles the execution of exploits against target systems 
 - **Integration**:
   - Triggered by the `run_attack()` method to start the exploitation phase.
   - Passes exploit UUIDs to the **SessionManager** for session tracking.
-
----
 
 ### 3. **SessionManager** 🔄
 
@@ -84,8 +80,6 @@ The **SessionManager** is in charge of managing sessions, including session upgr
   - Central to the transition between the exploitation and post-exploitation phases.
   - Handles session upgrades automatically and tracks session IDs.
 
----
-
 ### 4. **PrivilegeEscalationManager** 🔓
 
 The **PrivilegeEscalationManager** focuses on elevating privileges after a session has been established.
@@ -98,8 +92,6 @@ The **PrivilegeEscalationManager** focuses on elevating privileges after a sessi
 - **Integration**:
   - Optionally invoked in the `run_attack()` method if a privilege escalation module is specified.
   - Collaborates with the **SystemEnumerator** to determine potential escalation paths.
-
----
 
 ### 5. **ShellInterface** 🖥️
 
@@ -114,8 +106,6 @@ The **ShellInterface** provides an interactive shell for direct command executio
   - Invoked at the end of the `run_attack()` process for hands-on interaction with the compromised system.
   - Adjusts the shell type based on the session capabilities (e.g., upgraded Meterpreter session).
 
----
-
 ### 6. **SystemEnumerator** 🔍
 
 The **SystemEnumerator** is designed to gather extensive information about the compromised system for analysis.
@@ -129,8 +119,6 @@ The **SystemEnumerator** is designed to gather extensive information about the c
   - Called after session establishment and upgrade to provide critical system information.
   - Supplies data to the **PrivilegeEscalationManager** for identifying privilege escalation opportunities.
   - Capable of generating advanced reports using **LangChain** with LLM analysis through Groq Cloud.
-
----
 
 ### 7. **SecurityAnalyzer** 🛡️
 
@@ -176,8 +164,6 @@ The main exploitation process in Nemesys involves the following steps:
 
 7. **Interactive Shell**:
    - Provides a hands-on interactive shell through **ShellInterface** for manual exploitation, based on the elevated session or analysis results.
-
----
 
 ## Installation ⚙️
 To use Nemesys, you'll need to have the necessary dependencies installed and be able to run the Python script from your terminal.
