@@ -30,10 +30,12 @@
 
 ## 🔧💻 Requirements
 
-- 🐍 **Python 3.8+** for running Nemesys scripts.
-- 🦾 **Metasploit Framework** installed and configured.
-- ☁️ **LangChain** and **Groq** access for cloud-based LLM processing.
-- 🔑 **Root or Admin Privileges** for full functionality.
+- 🐍 **Python 3.8+**: Required for running the Nemesys scripts.
+- 🦾 **Metasploit Framework**: Installed and configured for exploit execution.
+- ☁️ **LangChain** and **Groq**: Access for cloud-based LLM processing with Groq's powerful AI model.
+- 🔑 **Root or Admin Privileges**: Necessary for full functionality and executing privileged exploits.
+- 🧠 **FAISS**: Set up for efficient similarity search and retrieval in the RAG (Retrieval-Augmented Generation) process.
+- 🤗 **HuggingFaceEmbeddings**: Required for embedding documents and enhancing the RAG technique for optimal security analysis.
 
 ## 🔧🧩 **Component Breakdown**: 🔍 Exploring the Building Blocks of Nemesys ⚙️
 
@@ -130,32 +132,52 @@ The **SystemEnumerator** is designed to gather extensive information about the c
 
 ---
 
+### 7. **SecurityAnalyzer** 🛡️
+
+The **SecurityAnalyzer** component is responsible for analyzing the system enumeration log and generating comprehensive security reports using advanced AI techniques.
+
+- **Responsibilities**:
+  - **Log Analysis**: The **SecurityAnalyzer** processes system enumeration logs received from the **SystemEnumerator** or another log source.
+  - **Retrieval-Augmented Generation (RAG)**: Uses **FAISS** for document retrieval and **HuggingFaceEmbeddings** for embedding the logs, allowing the AI model to generate insights based on the retrieved information.
+  - **Report Generation**: Creates professional security reports summarizing vulnerabilities, misconfigurations, and providing actionable recommendations.
+  - **Format Generation**: Outputs reports in both **PDF** and **JSON** formats, making the insights accessible for both human review and further automation.
+
+- **Integration**:
+  - Invoked after the **SystemEnumerator** process to analyze the system log and generate security reports based on the collected data.
+  - Leverages the AI model in **LangChain** via **Groq Cloud** for processing and generating tailored security insights.
+  - Plays a crucial role in the final analysis phase by providing detailed and actionable recommendations for improving the security posture of the target system.
+
+This modular structure ensures that each component performs its role effectively, contributing to a cohesive and efficient exploitation workflow in Nemesys.
+
 ## 🧩 Workflow Overview
 
 The main exploitation process in Nemesys involves the following steps:
 
 1. **Initialization**:
-   - Connects to Metasploit using **MetasploitClient**.
+   - Connects to Metasploit using **MetasploitClient** to establish a secure connection to the RPC server.
 
 2. **Exploitation**:
    - Executes the chosen exploit and payload using **ExploitManager**.
-   - Retrieves the session ID via **SessionManager**.
+   - Retrieves the session ID via **SessionManager** to track exploit progress.
 
 3. **Session Management**:
-   - Upgrades the session for enhanced control.
+   - Upgrades the session for enhanced control (e.g., Meterpreter shell) using **SessionManager**.
 
 4. **Privilege Escalation** (Optional):
-   - Attempts privilege escalation using **PrivilegeEscalationManager**.
+   - Attempts privilege escalation using **PrivilegeEscalationManager** to gain higher-level access.
 
 5. **System Enumeration**:
-   - Gathers system information with **SystemEnumerator**.
+   - Gathers extensive system information (OS details, running services, vulnerabilities) using **SystemEnumerator**.
+   - The **SystemEnumerator** outputs logs with system data that can later be analyzed.
 
-6. **Interactive Shell**:
-   - Provides a hands-on interactive shell through **ShellInterface** for manual exploitation.
+6. **Security Analysis**:
+   - The generated system enumeration log is fed into the **SecurityAnalyzer**.
+   - **SecurityAnalyzer** uses advanced techniques (RAG with **FAISS** and **HuggingFaceEmbeddings**) to process the log and generate a detailed security report.
+
+7. **Interactive Shell**:
+   - Provides a hands-on interactive shell through **ShellInterface** for manual exploitation, based on the elevated session or analysis results.
 
 ---
-
-This modular structure ensures that each component performs its role effectively, contributing to a cohesive and efficient exploitation workflow in Nemesys.
 
 ## Installation ⚙️
 To use Nemesys, you'll need to have the necessary dependencies installed and be able to run the Python script from your terminal.
