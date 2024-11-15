@@ -1,7 +1,7 @@
 from langchain_groq import ChatGroq
 from langchain.text_splitter import CharacterTextSplitter
 from langchain_huggingface.embeddings import HuggingFaceEmbeddings
-from langchain.vectorstores import FAISS
+from langchain_community.vectorstores import FAISS
 from langchain.chains import RetrievalQA
 from fpdf import FPDF
 import json
