@@ -261,6 +261,10 @@ sudo $HOME/Desktop/Nemesys-Kali/bin/python nemesys_cli.py \
 - `--lport 4445`: The local port on your machine that the reverse shell will connect to. ⚙️
 - `--privilege_exploit "linux/local/cve_2021_4034_pwnkit_lpe_pkexec"`: A local privilege escalation exploit to gain root access on the target. 🔓
 - `--target "192.168.11.128"`: The IP address of the target machine to attack. 🎯
+- `--log_file_path "path_to_log_file"`: The path to the system enumeration log file (default: `'system_enumeration.log'`). 📄
+- `--pdf_path "path_to_pdf_report"`: The path to save the generated PDF report (default: `'nemesys_report.pdf'`). 📑
+- `--json_path "path_to_json_report"`: The path to save the generated JSON report (default: `'nemesys_report.json'`). 📁
+- `--verbose`: Enable verbose logging for detailed output (useful for troubleshooting and in-depth analysis). 🔍
 
 #### Expected Outcome 🏆:
 Once you execute the command, **Nemesys** will attempt to exploit the ProFTPd vulnerability, trigger a reverse shell on your local machine, and then escalate privileges using the `pwnkit` local privilege escalation vulnerability.
@@ -308,6 +312,12 @@ sudo $HOME/Desktop/Nemesys-Kali/bin/python nemesys_cli.py \
 #### What Happens? 🔍
 This command will perform the exploit and create a reverse shell without attempting to escalate privileges. It's useful when you only need a foothold without full system control. 💥
 
+### Important Notes
+
+- Make sure to replace `your_groq_api_key_here` and `your_model_id_here` in your `.env` file with your actual API key and model ID.
+- Ensure that the specified network range is appropriate for your nemesys setup.
+
+
 ## ⚠️ Disclaimer
 **Nemesys is designed as a learning and training tool** for applying Artificial Intelligence (AI) in the field of cybersecurity. Its primary purpose is to automate the process of generating detailed security reports based on system enumeration and vulnerability analysis. **Nemesys is intended for ethical and authorized use only**. Unauthorized use may result in severe legal consequences. Always ensure that you have proper authorization and are conducting your activities in a controlled, legal, and ethical environment, such as a lab setup or with explicit permission to use this tool on any system.
 
@@ -316,10 +326,59 @@ All tests and exploitation workflows in **Nemesys** were conducted in a controll
 ## 🛡️ Legal
 The author of Nemesys is not responsible for any misuse or damage caused by this tool. Use responsibly and comply with all local laws.
 
-## 🖤 Contributing
-Contributions are welcome! Feel free to submit issues or pull requests to help improve Nemesys.
+## Acknowledgements 🙏
 
-## 💬 Contact
-For any questions, suggestions, or feedback, reach out via GitHub or email.
+🙏 I would like to express my sincere gratitude to [Santiago Hernández, a leading expert in Cybersecurity and Artificial Intelligence](https://www.udemy.com/user/shramos/). His outstanding course on **Cybersecurity and Ethical Hacking**, available on Udemy, was instrumental in the development of this project. The insights and techniques I gained from his course were invaluable in guiding my approach to cybersecurity practices. Thank you for sharing your knowledge and expertise!
 
-## 🏴‍☠️ Happy Hacking!
+## 🤝 **Contributing**
+Contributions to Nemesys are highly encouraged! If you're interested in adding new features, resolving bugs, or enhancing the project's functionality, please feel free to submit pull requests.
+
+## Get in Touch 📬
+
+Nemesys is developed and maintained by **Sergio Sánchez Sánchez** (Dream Software). Special thanks to the open-source community and the contributors who have made this project possible. If you have any questions, feedback, or suggestions, feel free to reach out at  [dreamsoftware92@gmail.com](mailto:dreamsoftware92@gmail.com).
+
+## Visitors Count
+
+<img width="auto" src="https://profile-counter.glitch.me/nemesys/count.svg" />
+ 
+ ## Please Share & Star the repository to keep me motivated.
+  <a href = "https://github.com/sergio11/nemesys/stargazers">
+     <img src = "https://img.shields.io/github/stars/sergio11/nemesys" />
+  </a>
+
+
+## License ⚖️
+
+This project is licensed under the MIT License, an open-source software license that allows developers to freely use, copy, modify, and distribute the software. 🛠️ This includes use in both personal and commercial projects, with the only requirement being that the original copyright notice is retained. 📄
+
+Please note the following limitations:
+
+- The software is provided "as is", without any warranties, express or implied. 🚫🛡️
+- If you distribute the software, whether in original or modified form, you must include the original copyright notice and license. 📑
+- The license allows for commercial use, but you cannot claim ownership over the software itself. 🏷️
+
+The goal of this license is to maximize freedom for developers while maintaining recognition for the original creators.
+
+```
+MIT License
+
+Copyright (c) 2024 Dream software - Sergio Sánchez 
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
