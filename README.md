@@ -28,6 +28,7 @@
 - 🤖 **Integration with Metasploit RPC**: Direct connection to Metasploit’s RPC interface allows efficient management of active sessions, payloads, and exploit modules, optimizing the post-exploitation workflow.
 - 🛠️ **User-Friendly and Extensible**: Built with an intuitive interface for streamlined usage. Easily customizable to fit specific exploitation scenarios and to integrate with other tools in your security arsenal.
 
+
 ## 🔧💻 Requirements
 
 - 🐍 **Python 3.8+**: Required for running the Nemesys scripts.
@@ -36,6 +37,10 @@
 - 🔑 **Root or Admin Privileges**: Necessary for full functionality and executing privileged exploits.
 - 🧠 **FAISS**: Set up for efficient similarity search and retrieval in the RAG (Retrieval-Augmented Generation) process.
 - 🤗 **HuggingFaceEmbeddings**: Required for embedding documents and enhancing the RAG technique for optimal security analysis.
+
+<p align="center">
+  <img src="doc/screenshots/picture_3.PNG" />
+</p>
 
 ## 🔧🧩 **Component Breakdown**: 🔍 Exploring the Building Blocks of Nemesys ⚙️
 
@@ -53,6 +58,10 @@ The **MetasploitClient** serves as the connection interface between Nemesys and 
 - **Integration**:
   - Initiated during the setup of Nemesys to validate connectivity.
   - Essential for all interactions with Metasploit modules across components.
+
+<p align="center">
+  <img src="doc/screenshots/picture_4.PNG" />
+</p>
 
 ### 2. **ExploitManager** 💥
 
@@ -106,9 +115,22 @@ The **ShellInterface** provides an interactive shell for direct command executio
   - Invoked at the end of the `run_attack()` process for hands-on interaction with the compromised system.
   - Adjusts the shell type based on the session capabilities (e.g., upgraded Meterpreter session).
 
+<p align="center">
+  <img src="doc/screenshots/picture_5.PNG" />
+</p>
+
+<p align="center">
+  <img src="doc/screenshots/picture_6.PNG" />
+</p>
+
+
 ### 6. **SystemEnumerator** 🔍
 
 The **SystemEnumerator** is designed to gather extensive information about the compromised system for analysis.
+
+<p align="center">
+  <img src="doc/screenshots/picture_7.PNG" />
+</p>
 
 - **Responsibilities**:
   - Collects system details such as OS version, network interfaces, installed software, and running processes.
@@ -119,6 +141,15 @@ The **SystemEnumerator** is designed to gather extensive information about the c
   - Called after session establishment and upgrade to provide critical system information.
   - Supplies data to the **PrivilegeEscalationManager** for identifying privilege escalation opportunities.
   - Capable of generating advanced reports using **LangChain** with LLM analysis through Groq Cloud.
+
+<p align="center">
+  <img src="doc/screenshots/picture_8.PNG" />
+</p>
+
+<p align="center">
+  <img src="doc/screenshots/picture_9.PNG" />
+</p>
+
 
 ### 7. **SecurityAnalyzer** 🛡️
 
@@ -134,6 +165,14 @@ The **SecurityAnalyzer** component is responsible for analyzing the system enume
   - Invoked after the **SystemEnumerator** process to analyze the system log and generate security reports based on the collected data.
   - Leverages the AI model in **LangChain** via **Groq Cloud** for processing and generating tailored security insights.
   - Plays a crucial role in the final analysis phase by providing detailed and actionable recommendations for improving the security posture of the target system.
+
+<p align="center">
+  <img src="doc/screenshots/picture_10.PNG" />
+</p>
+
+<p align="center">
+  <img src="doc/screenshots/picture_11.PNG" />
+</p>
 
 This modular structure ensures that each component performs its role effectively, contributing to a cohesive and efficient exploitation workflow in Nemesys.
 
