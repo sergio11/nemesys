@@ -29,22 +29,29 @@ class SystemEnumerator:
         self.client = client
         self.timeout = timeout
 
-    def enumerate_system(self, session_id):
+    def enumerate_system(self, session_id, log_file_path=None):
         """
         Performs the enumeration of the victim's system by running various commands to gather critical 
         system information.
 
         This method logs the results of each enumeration task into a timestamped log file to avoid overwriting.
-
+        
         Args:
             session_id (str): The session ID for the active Metasploit session.
+            log_file_path (str, optional): The file path where enumeration results should be saved.
+                                        If not provided, a timestamped log file is generated.
+        
+        Returns:
+            str: The path of the log file containing the system enumeration results.
         """
         nemesysLogger.info("💀 Starting system enumeration...")
 
-        # Generate a filename with timestamp to avoid conflicts
-        timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-        log_filename = f"system_enumeration_{timestamp}.log"
-
+        # Generate a filename with timestamp if no log_file_path is provided
+        if log_file_path is None:
+            timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+            log_filename = f"system_enumeration_{timestamp}.log"
+        else:
+            log_filename = log_file_path
         # Open the log file to store command outputs
         with open(log_filename, "a") as log_file:
             # Run specific enumeration tasks
@@ -61,6 +68,7 @@ class SystemEnumerator:
             self._check_installed_packages(session_id, log_file)
             self._check_selinux_apparmor(session_id, log_file)
             nemesysLogger.info(f"💀 System enumeration complete ✅ (Results saved in {log_filename})")
+        return log_filename
 
     def _enumerate_os_and_kernel(self, session_id, log_file):
         """

@@ -14,7 +14,7 @@ class PrivilegeEscalationManager:
         timeout (int): Wait time for exploit execution to complete.
     """
 
-    def __init__(self, client, timeout=30):
+    def __init__(self, client, timeout=30, verbose=False):
         """
         Initialize with Metasploit client and timeout.
 
@@ -24,6 +24,7 @@ class PrivilegeEscalationManager:
         """
         self.client = client
         self.timeout = timeout
+        self.verbose = verbose
 
     def run(self, session_id, exploit_name, target):
         """
@@ -48,6 +49,8 @@ class PrivilegeEscalationManager:
             current_console.write(f'use {exploit_name}\n')
             current_console.write(f'set SESSION {session_id}\n')
             current_console.write(f'set RHOSTS {target}\n')
+            if self.verbose: 
+                current_console.write(f'set verbose true\n')
 
             nemesysLogger.info("💉 [PAYLOAD] Injecting malicious code into the system veins...")
             current_console.write('run\n')

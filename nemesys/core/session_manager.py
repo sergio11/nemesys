@@ -14,7 +14,7 @@ class SessionManager:
         upgrade_timeout (int): Timeout for shell-to-Meterpreter upgrade, default 30 seconds.
     """
 
-    def __init__(self, client, session_timeout=15, upgrade_timeout=30):
+    def __init__(self, client, session_timeout=15, upgrade_timeout=30, verbose=False):
         """
         Initializes the SessionManager with the given Metasploit client.
 
@@ -26,6 +26,7 @@ class SessionManager:
         self.client = client
         self.session_timeout = session_timeout
         self.upgrade_timeout = upgrade_timeout
+        self.verbose = verbose
 
     def list_sessions(self):
         """Lists active sessions and their details."""
@@ -86,6 +87,8 @@ class SessionManager:
             current_console.write(f'set PAYLOAD_OVERRIDE linux/x64/meterpreter/reverse_tcp\n')
             current_console.write(f'set PLATFORM_OVERRIDE linux\n')
             current_console.write(f'set PSH_ARCH_OVERRIDE x64\n')
+            if self.verbose:
+                 current_console.write(f'set verbose true\n')
 
             nemesysLogger.info(f"🔧 [UPGRADE] Running upgrade for session {session_id}...")
             current_console.write('run\n')

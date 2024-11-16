@@ -30,6 +30,14 @@ def main():
     parser.add_argument('--privilege_exploit', type=str, help="Privilege escalation exploit to use (e.g., PwnKit).")
     parser.add_argument('--target', type=str, required=True, help="Target system IP address.")
     
+    # Arguments for SecurityAnalyzer reports
+    parser.add_argument('--log_file_path', type=str, default="system_enumeration.log", help="Path to the system enumeration log file (default: 'system_enumeration.log').")
+    parser.add_argument('--pdf_path', type=str, default="nemesys_report.pdf", help="Path to save the generated PDF report (default: 'nemesys_report.pdf').")
+    parser.add_argument('--json_path', type=str, default="nemesys_report.json", help="Path to save the generated JSON report (default: 'nemesys_report.json').")
+    
+    # Verbose mode for detailed logging
+    parser.add_argument('--verbose', action='store_true', help="Enable verbose logging for detailed output.")
+
     args = parser.parse_args()
 
     # Read model ID and Groq API key from environment variables if not provided in command-line arguments
@@ -45,7 +53,7 @@ def main():
         return
 
     # Instantiate Nemesys client
-    client = Nemesys(password=args.password, model_id=model_id, groq_api_key=groq_api_key)
+    client = Nemesys(password=args.password, model_id=model_id, groq_api_key=groq_api_key, verbose=args.verbose)
 
     # Set up exploit and payload configurations
     exploit_options = {
@@ -59,16 +67,17 @@ def main():
 
     # Run the attack with the provided arguments
     try:
-        print(f"Running attack: {args.exploit_name} with payload: {args.payload_name}")
         client.run_attack(
             exploit_name=args.exploit_name,
             payload_name=args.payload_name,
             exploit_options=exploit_options,
             payload_options=payload_options,
             privilege_escalation_exploit=args.privilege_exploit,
-            target=args.target
+            target=args.target,
+            log_file_path=args.log_file_path,
+            pdf_path=args.pdf_path,
+            json_path=args.json_path
         )
-        print("Attack completed successfully.")
     except Exception as e:
         print(f"Error during attack: {e}")
 
