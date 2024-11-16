@@ -269,7 +269,9 @@ If you don't need to perform privilege escalation, simply omit the `--privilege_
 This command will perform the exploit and create a reverse shell without attempting to escalate privileges. It's useful when you only need a foothold without full system control. 💥
 
 ## ⚠️ Disclaimer
-**Nemesys is intended for authorized and ethical use only**. Unauthorized use may result in severe legal consequences. Always have proper authorization before using this tool on any system.
+**Nemesys is designed as a learning and training tool** for applying Artificial Intelligence (AI) in the field of cybersecurity. Its primary purpose is to automate the process of generating detailed security reports based on system enumeration and vulnerability analysis. **Nemesys is intended for ethical and authorized use only**. Unauthorized use may result in severe legal consequences. Always ensure that you have proper authorization and are conducting your activities in a controlled, legal, and ethical environment, such as a lab setup or with explicit permission to use this tool on any system.
+
+All tests and exploitation workflows in **Nemesys** were conducted in a controlled environment using **Metasploitable Ubuntu**, a deliberately vulnerable machine designed for security testing and training. This testing was carried out in a dedicated **lab environment** to ensure ethical use and avoid unauthorized access to any external systems. The results of these tests demonstrate the tool’s effectiveness in identifying and exploiting vulnerabilities in a controlled, safe, and legal environment.
 
 ## 🛡️ Legal
 The author of Nemesys is not responsible for any misuse or damage caused by this tool. Use responsibly and comply with all local laws.
