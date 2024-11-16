@@ -30,10 +30,12 @@
 
 ## 🔧💻 Requirements
 
-- 🐍 **Python 3.8+** for running Nemesys scripts.
-- 🦾 **Metasploit Framework** installed and configured.
-- ☁️ **LangChain** and **Groq** access for cloud-based LLM processing.
-- 🔑 **Root or Admin Privileges** for full functionality.
+- 🐍 **Python 3.8+**: Required for running the Nemesys scripts.
+- 🦾 **Metasploit Framework**: Installed and configured for exploit execution.
+- ☁️ **LangChain** and **Groq**: Access for cloud-based LLM processing with Groq's powerful AI model.
+- 🔑 **Root or Admin Privileges**: Necessary for full functionality and executing privileged exploits.
+- 🧠 **FAISS**: Set up for efficient similarity search and retrieval in the RAG (Retrieval-Augmented Generation) process.
+- 🤗 **HuggingFaceEmbeddings**: Required for embedding documents and enhancing the RAG technique for optimal security analysis.
 
 ## 🔧🧩 **Component Breakdown**: 🔍 Exploring the Building Blocks of Nemesys ⚙️
 
@@ -52,8 +54,6 @@ The **MetasploitClient** serves as the connection interface between Nemesys and 
   - Initiated during the setup of Nemesys to validate connectivity.
   - Essential for all interactions with Metasploit modules across components.
 
----
-
 ### 2. **ExploitManager** 💥
 
 The **ExploitManager** handles the execution of exploits against target systems using Metasploit.
@@ -66,8 +66,6 @@ The **ExploitManager** handles the execution of exploits against target systems 
 - **Integration**:
   - Triggered by the `run_attack()` method to start the exploitation phase.
   - Passes exploit UUIDs to the **SessionManager** for session tracking.
-
----
 
 ### 3. **SessionManager** 🔄
 
@@ -82,8 +80,6 @@ The **SessionManager** is in charge of managing sessions, including session upgr
   - Central to the transition between the exploitation and post-exploitation phases.
   - Handles session upgrades automatically and tracks session IDs.
 
----
-
 ### 4. **PrivilegeEscalationManager** 🔓
 
 The **PrivilegeEscalationManager** focuses on elevating privileges after a session has been established.
@@ -97,8 +93,6 @@ The **PrivilegeEscalationManager** focuses on elevating privileges after a sessi
   - Optionally invoked in the `run_attack()` method if a privilege escalation module is specified.
   - Collaborates with the **SystemEnumerator** to determine potential escalation paths.
 
----
-
 ### 5. **ShellInterface** 🖥️
 
 The **ShellInterface** provides an interactive shell for direct command execution on compromised targets.
@@ -111,8 +105,6 @@ The **ShellInterface** provides an interactive shell for direct command executio
 - **Integration**:
   - Invoked at the end of the `run_attack()` process for hands-on interaction with the compromised system.
   - Adjusts the shell type based on the session capabilities (e.g., upgraded Meterpreter session).
-
----
 
 ### 6. **SystemEnumerator** 🔍
 
@@ -128,34 +120,110 @@ The **SystemEnumerator** is designed to gather extensive information about the c
   - Supplies data to the **PrivilegeEscalationManager** for identifying privilege escalation opportunities.
   - Capable of generating advanced reports using **LangChain** with LLM analysis through Groq Cloud.
 
----
+### 7. **SecurityAnalyzer** 🛡️
+
+The **SecurityAnalyzer** component is responsible for analyzing the system enumeration log and generating comprehensive security reports using advanced AI techniques.
+
+- **Responsibilities**:
+  - **Log Analysis**: The **SecurityAnalyzer** processes system enumeration logs received from the **SystemEnumerator** or another log source.
+  - **Retrieval-Augmented Generation (RAG)**: Uses **FAISS** for document retrieval and **HuggingFaceEmbeddings** for embedding the logs, allowing the AI model to generate insights based on the retrieved information.
+  - **Report Generation**: Creates professional security reports summarizing vulnerabilities, misconfigurations, and providing actionable recommendations.
+  - **Format Generation**: Outputs reports in both **PDF** and **JSON** formats, making the insights accessible for both human review and further automation.
+
+- **Integration**:
+  - Invoked after the **SystemEnumerator** process to analyze the system log and generate security reports based on the collected data.
+  - Leverages the AI model in **LangChain** via **Groq Cloud** for processing and generating tailored security insights.
+  - Plays a crucial role in the final analysis phase by providing detailed and actionable recommendations for improving the security posture of the target system.
+
+This modular structure ensures that each component performs its role effectively, contributing to a cohesive and efficient exploitation workflow in Nemesys.
 
 ## 🧩 Workflow Overview
 
 The main exploitation process in Nemesys involves the following steps:
 
 1. **Initialization**:
-   - Connects to Metasploit using **MetasploitClient**.
+   - Connects to Metasploit using **MetasploitClient** to establish a secure connection to the RPC server.
 
 2. **Exploitation**:
    - Executes the chosen exploit and payload using **ExploitManager**.
-   - Retrieves the session ID via **SessionManager**.
+   - Retrieves the session ID via **SessionManager** to track exploit progress.
 
 3. **Session Management**:
-   - Upgrades the session for enhanced control.
+   - Upgrades the session for enhanced control (e.g., Meterpreter shell) using **SessionManager**.
 
 4. **Privilege Escalation** (Optional):
-   - Attempts privilege escalation using **PrivilegeEscalationManager**.
+   - Attempts privilege escalation using **PrivilegeEscalationManager** to gain higher-level access.
 
 5. **System Enumeration**:
-   - Gathers system information with **SystemEnumerator**.
+   - Gathers extensive system information (OS details, running services, vulnerabilities) using **SystemEnumerator**.
+   - The **SystemEnumerator** outputs logs with system data that can later be analyzed.
 
-6. **Interactive Shell**:
-   - Provides a hands-on interactive shell through **ShellInterface** for manual exploitation.
+6. **Security Analysis**:
+   - The generated system enumeration log is fed into the **SecurityAnalyzer**.
+   - **SecurityAnalyzer** uses advanced techniques (RAG with **FAISS** and **HuggingFaceEmbeddings**) to process the log and generate a detailed security report.
+
+7. **Interactive Shell**:
+   - Provides a hands-on interactive shell through **ShellInterface** for manual exploitation, based on the elevated session or analysis results.
+
+## Installation ⚙️
+To use Nemesys, you'll need to have the necessary dependencies installed and be able to run the Python script from your terminal.
+
+Clone the repository to your machine:
+
+```bash
+git clone https://github.com/sergio11/nemesys.git
+```
+
+Navigate to the directory:
+
+```bash
+cd nemesys
+```
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+## Usage Examples 🚀
+
+Once everything is set up, you can invoke the **Nemesys** tool using the `nemesys_cli.py` script. Below are several examples of how to use it, along with explanations.
+
+### 1. Basic Exploit Invocation 💥
+
+This command runs an exploit with a specific payload and sets up reverse connections for the exploit to work.
+
+#### Description 📜:
+- `--password "password"`: The password used for authentication on the target system. 🔑
+- `--exploit_name "unix/ftp/proftpd_modcopy_exec"`: The specific exploit you want to run, targeting a vulnerability in ProFTPd. 📡
+- `--payload_name "cmd/unix/reverse_perl"`: The payload that will execute after the exploit is successful (reverse shell using Perl). 🖥️
+- `--rhosts "192.168.11.128"`: The target machine's IP address for the exploit. 🎯
+- `--sitepath "/var/www/html"`: The path to the website directory (used in web-based exploits). 🌍
+- `--lhost "192.168.11.129"`: Your machine's IP address where the reverse shell will connect back. 🔙
+- `--lport 4445`: The local port on your machine that the reverse shell will connect to. ⚙️
+- `--privilege_exploit "linux/local/cve_2021_4034_pwnkit_lpe_pkexec"`: A local privilege escalation exploit to gain root access on the target. 🔓
+- `--target "192.168.11.128"`: The IP address of the target machine to attack. 🎯
+
+#### Expected Outcome 🏆:
+Once you execute the command, **Nemesys** will attempt to exploit the ProFTPd vulnerability, trigger a reverse shell on your local machine, and then escalate privileges using the `pwnkit` local privilege escalation vulnerability.
 
 ---
 
-This modular structure ensures that each component performs its role effectively, contributing to a cohesive and efficient exploitation workflow in Nemesys.
+### 2. Using a Different Payload 🚨
+
+To use a different payload (e.g., `cmd/unix/reverse_bash`), simply modify the `--payload_name` parameter.
+
+#### Change Explained 🔄:
+- `--payload_name "cmd/unix/reverse_bash"`: Swapping the payload to a Bash reverse shell. 💥
+
+---
+
+### 3. Exploiting Without Privilege Escalation 🔓
+
+If you don't need to perform privilege escalation, simply omit the `--privilege_exploit` parameter.
+
+#### What Happens? 🔍
+This command will perform the exploit and create a reverse shell without attempting to escalate privileges. It's useful when you only need a foothold without full system control. 💥
 
 ## ⚠️ Disclaimer
 **Nemesys is intended for authorized and ethical use only**. Unauthorized use may result in severe legal consequences. Always have proper authorization before using this tool on any system.
