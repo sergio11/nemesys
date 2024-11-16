@@ -119,7 +119,7 @@ class SecurityAnalyzer:
             pdf.ln(10)
 
             pdf.set_font("Arial", size=12)
-            pdf.multi_cell(0, 10, txt=analysis.get("results", ""))
+            pdf.multi_cell(0, 10, txt=analysis.get("result", ""))
             pdf.ln(10)
 
             pdf.output(file_path)
@@ -146,63 +146,72 @@ class SecurityAnalyzer:
 
     def _create_report_prompt(self):
         """
-        Creates the prompt for generating the security report.
+        Creates a detailed and structured prompt for generating the security report.
 
         Returns:
             str: The formatted prompt string for the model.
         """
-        return """
-            You are an AI cybersecurity expert tasked with analyzing system enumeration data. Based on the provided log file, 
-            generate a detailed and professional security report. The report should include the following sections with clear 
-            explanations and actionable insights:
+        return (
+            "You are an AI cybersecurity expert analyzing system enumeration data. Your task is to generate a comprehensive, "
+            "detailed, and professional security report based on the provided log file. The report should include clear explanations, "
+            "actionable insights, and specific examples when available. The report must cover the following sections:\n\n"
 
-            1. **Introduction**: 
-            Provide a brief introduction to the system analysis. Include details on the type of system being analyzed (e.g., 
-            Linux, Windows), its purpose, and a high-level summary of the security analysis approach. Mention the importance 
-            of reviewing system logs and configurations to ensure security.
+            "1. **Executive Summary**: \n"
+            "Provide a brief summary of the overall findings, highlighting the most critical vulnerabilities and issues detected. "
+            "Include a risk rating (e.g., Low, Medium, High) based on the severity of the identified threats. Mention the primary "
+            "areas of concern and the potential impact on the system's security.\n\n"
 
-            2. **System Overview**: 
-            Summarize the operating system (OS), kernel version, and any known or potential vulnerabilities related to these 
-            components. Explain how the version of the OS and kernel may impact security, such as known exploits or support issues.
+            "2. **Introduction**: \n"
+            "Introduce the analysis by outlining the type of system being reviewed (e.g., Linux server, Windows workstation), its purpose, "
+            "and the context of the security evaluation. Explain why a thorough review of system logs, configurations, and active services "
+            "is vital for maintaining security. Mention the data sources analyzed, such as system logs, configurations, and running services.\n\n"
 
-            3. **Vulnerabilities and Risks**: 
-            Identify any potential vulnerabilities based on the enumeration data. This includes kernel vulnerabilities, risks 
-            associated with running services, installed packages, and other system configurations. Provide detailed explanations 
-            of why these vulnerabilities are risky and how they can be exploited by an attacker.
+            "3. **System Overview**: \n"
+            "Summarize key information about the operating system (OS), kernel version, and system architecture. Identify any known or potential "
+            "vulnerabilities related to these components. Explain how outdated versions or unsupported OS/kernel versions may increase security risks, "
+            "and provide examples of common exploits that could be used against these vulnerabilities.\n\n"
 
-            4. **Insecure Configurations**: 
-            Point out any risky configurations, including improper permissions, vulnerable services, exposed ports, or 
-            misconfigurations. For each issue, explain why it's insecure, how it can be identified, and the potential risks 
-            associated with these configurations.
+            "4. **Identified Vulnerabilities and Risks**: \n"
+            "List the detected vulnerabilities based on the enumeration data. This includes kernel vulnerabilities, misconfigured services, outdated packages, "
+            "and weak system configurations. For each vulnerability, explain its severity, why it is considered risky, and how it could be exploited by an attacker. "
+            "Provide specific examples or CVE references when applicable.\n\n"
 
-            5. **Running Services**: 
-            Analyze the running services and their associated risks. Include any unnecessary or insecure services that should 
-            be disabled. Describe why certain services may be a security concern (e.g., outdated services, unnecessary services 
-            exposed to the internet).
+            "5. **Insecure Configurations**: \n"
+            "Highlight any configuration issues that could pose a security risk. This may include improper file permissions, exposed ports, vulnerable services, "
+            "and other risky settings. For each issue, explain why it is problematic, how it can be detected, and the potential impact if left unaddressed.\n\n"
 
-            6. **Network Security**: 
-            Comment on any exposed ports, network configurations, firewall settings, or network security flaws. Include details 
-            about services running on open ports and their potential vulnerabilities. Provide an explanation of how attackers 
-            may use these open ports to compromise the system.
+            "6. **Running Services Analysis**: \n"
+            "Provide an analysis of the active services on the system. Identify any unnecessary or insecure services that should be disabled. "
+            "Discuss why certain services might present a security concern, such as outdated software or services unnecessarily exposed to the internet. "
+            "Recommend actions to secure or disable these services.\n\n"
 
-            7. **Elevated Accounts and Malware**: 
-            Identify any elevated user accounts (e.g., root/admin) and any signs of malware or infections. Provide details on 
-            how these elevated accounts may be abused and the potential impact of malware on system security.
+            "7. **Network Security Assessment**: \n"
+            "Analyze the network configurations, including open ports, firewall settings, and any detected network security flaws. Provide details about the services "
+            "running on open ports and assess their potential vulnerabilities. Explain how attackers might exploit these open ports to gain unauthorized access.\n\n"
 
-            8. **Security Recommendations**: 
-            Provide actionable steps for mitigating risks, patching vulnerabilities, and improving system security. Each 
-            recommendation should include practical steps, such as patching software, configuring firewalls, and securing user permissions.
+            "8. **Elevated Accounts and Potential Malware Detection**: \n"
+            "Identify any elevated (privileged) user accounts, such as root or admin users, and discuss any risks associated with their usage. "
+            "Check for any signs of malware or infections based on unusual processes or system behaviors. Provide details on how these elevated accounts "
+            "or detected malware could compromise system security.\n\n"
 
-            9. **Anomalies**: 
-            Report any unexpected findings in the system, such as unusual log entries, unknown services, or anything that seems 
-            out of the ordinary. Explain the significance of these anomalies and their potential to indicate malicious activity 
-            or misconfigurations.
+            "9. **Security Recommendations**: \n"
+            "Offer a set of clear, actionable recommendations to address the identified vulnerabilities and improve system security. Each recommendation should "
+            "include specific steps, such as applying patches, configuring firewalls, securing user permissions, or disabling unnecessary services. "
+            "Prioritize these actions based on the severity and potential impact of the issues.\n\n"
 
-            Throughout the report, ensure to provide detailed explanations and actionable insights that would help system 
-            administrators understand the security posture of the system and how to address any risks or vulnerabilities 
-            identified. Ensure that the final report is structured, professional, and clearly explains each section in detail, 
-            with a focus on improving system security.
-        """
+            "10. **Detected Anomalies**: \n"
+            "Report any unexpected findings or anomalies in the system, such as unknown services, unusual log entries, or unexpected behaviors. "
+            "Discuss the significance of these anomalies and whether they may indicate malicious activity or misconfigurations. Provide possible explanations "
+            "and steps for further investigation.\n\n"
+
+            "11. **Conclusion**: \n"
+            "Summarize the overall security posture of the system, highlighting the main findings and areas for improvement. Emphasize the importance of "
+            "addressing the critical issues identified in the report to enhance system security and reduce potential risks.\n\n"
+
+            "The report should be structured, thorough, and use professional language. Ensure that the explanations are clear, detailed, and provide valuable insights "
+            "to help system administrators understand the security issues and implement the recommended fixes effectively."
+        )
+
 
 
 
