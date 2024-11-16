@@ -5,7 +5,11 @@
 🙏 I would like to express my sincere gratitude to [Santiago Hernández, a leading expert in Cybersecurity and Artificial Intelligence](https://www.udemy.com/user/shramos/). His outstanding course on **Cybersecurity and Ethical Hacking**, available on Udemy, was instrumental in the development of this project. The insights and techniques I gained from his course were invaluable in guiding my approach to cybersecurity practices. Thank you for sharing your knowledge and expertise!
 
 ### Disclaimer ⚠️
-**Nemesys is intended for authorized and ethical use only**. Unauthorized use may result in severe legal consequences. Always have proper authorization before using this tool on any system.
+**Nemesys is designed as a learning and training tool** for applying Artificial Intelligence (AI) in the field of cybersecurity. Its primary purpose is to automate the process of generating detailed security reports based on system enumeration and vulnerability analysis. **Nemesys is intended for ethical and authorized use only**. Unauthorized use may result in severe legal consequences. Always ensure that you have proper authorization and are conducting your activities in a controlled, legal, and ethical environment, such as a lab setup or with explicit permission to use this tool on any system.
+
+
+### Testing Information 🧪
+All tests and exploitation workflows in **Nemesys** were conducted in a controlled environment using **Metasploitable Ubuntu**, a deliberately vulnerable machine designed for security testing and training. This testing was carried out in a dedicated **lab environment** to ensure ethical use and avoid unauthorized access to any external systems. The results of these tests demonstrate the tool’s effectiveness in identifying and exploiting vulnerabilities in a controlled, safe, and legal environment.
 
 <p align="center">
   <img src="https://img.shields.io/badge/langchain-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white" />
