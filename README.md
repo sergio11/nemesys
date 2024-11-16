@@ -180,6 +180,10 @@ The **SecurityAnalyzer** component is responsible for analyzing the system enume
   <img src="doc/screenshots/picture_11.PNG" />
 </p>
 
+<p align="center">
+  <img src="doc/screenshots/picture_12.PNG" />
+</p>
+
 This modular structure ensures that each component performs its role effectively, contributing to a cohesive and efficient exploitation workflow in Nemesys.
 
 ## 🧩 Workflow Overview
