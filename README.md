@@ -23,6 +23,10 @@ All tests and exploitation workflows in **Nemesys** were conducted in a controll
   <img src="doc/screenshots/picture_1.PNG" />
 </p>
 
+## More Details 📝
+
+For comprehensive information about this project, check out this [Medium article](https://sanchezsanchezsergio418.medium.com/harnessing-generative-ai-for-post-exploitation-vulnerability-reporting-in-cybersecurity-a-5ba3e53958ec).
+
 ## 🌟 **Explore My Other Open-Source Ethical Hacking Tools**
 
 If you're interested in more powerful tools for ethical hacking, make sure to check out my other open-source projects designed to help cybersecurity professionals and penetration testers:
