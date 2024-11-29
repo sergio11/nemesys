@@ -23,6 +23,16 @@ All tests and exploitation workflows in **Nemesys** were conducted in a controll
   <img src="doc/screenshots/picture_1.PNG" />
 </p>
 
+## 🌟 **Explore My Other Open-Source Ethical Hacking Tools**
+
+If you're interested in more powerful tools for ethical hacking, make sure to check out my other open-source projects designed to help cybersecurity professionals and penetration testers:
+
+- [🕷️ **BlackVenom**](https://github.com/sergio11/blackvenom): The ultimate **ARP** and **DNS spoofing** tool for **intercepting network traffic** and uncovering vulnerabilities with stealth and precision.  
+- [🌐 **ZeroTrace**](https://github.com/sergio11/zero_trace_hacking_tool): A powerful **search engine dorking** tool designed to identify **attack vectors** and uncover **exposed sensitive information** across the web.
+- [🔐 **DecryptX**](https://github.com/sergio11/decryptx): An **advanced hash and password security assessment tool** that helps **cybersecurity experts** and **penetration testers** analyze **password hashes** and **encrypted ZIP files** to assess the robustness of security implementations.
+
+These tools are designed to streamline penetration testing, enhance security assessments, and provide in-depth insights into vulnerabilities. Explore them to level up your ethical hacking skills! 💻🔍
+
 ## 🚀✨ Key Features
 
 - 🔍 **Automated Exploitation**: Execute Metasploit exploits effortlessly against target systems. Choose your desired exploit and payload, and let Nemesys automate the execution, session creation, and follow-up tasks.
