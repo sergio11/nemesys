@@ -37,7 +37,8 @@ If you're passionate about ethical hacking and want to elevate your cybersecurit
 
 - [🌐 **ZeroTrace**](https://github.com/sergio11/zero_trace_hacking_tool): A robust **search engine dorking** tool for identifying potential **attack vectors** and locating **sensitive exposed information** across the web. Perfect for cybersecurity professionals aiming to enhance reconnaissance during penetration testing.  
 
-- [🔐 **DecryptX**](https://github.com/sergio11/decryptx): An **advanced hash and password security assessment tool** that empowers you to analyze **password hashes**, **encrypted ZIP files**, and more. Ideal for evaluating the strength of encryption and identifying weaknesses in **security implementations**.  
+- [🔐 **DecryptX**](https://github.com/sergio11/decryptx): An **advanced hash and password security assessment tool** that empowers you to analyze **password hashes**, **encrypted ZIP files**, and more. Ideal for evaluating the strength of encryption and identifying weaknesses in **security implementations**.
+- [ 🌑 **EclipseRecon**](https://github.com/sergio11/eclipserecon): is a stealthy web reconnaissance tool for uncovering hidden vulnerabilities, subdomains, and site structures. 🕵️‍♂️🔍 It empowers security professionals to identify critical attack surfaces with precision, ensuring proactive defense. 🚨💻
 
 These tools are designed to streamline penetration testing, enhance security assessments, and provide in-depth insights into vulnerabilities. Explore them to level up your ethical hacking skills! 💻🔍
 
