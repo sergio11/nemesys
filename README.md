@@ -6,9 +6,6 @@
 
 🙏 I would like to express my sincere gratitude to [Santiago Hernández, a leading expert in Cybersecurity and Artificial Intelligence](https://www.udemy.com/user/shramos/). His outstanding course on **Cybersecurity and Ethical Hacking**, available on Udemy, was instrumental in the development of this project. The insights and techniques I gained from his course were invaluable in guiding my approach to cybersecurity practices. Thank you for sharing your knowledge and expertise!
 
-### Disclaimer ⚠️
-**Nemesys is designed as a learning and training tool** for applying Artificial Intelligence (AI) in the field of cybersecurity. Its primary purpose is to automate the process of generating detailed security reports based on system enumeration and vulnerability analysis. **Nemesys is intended for ethical and authorized use only**. Unauthorized use may result in severe legal consequences. Always ensure that you have proper authorization and are conducting your activities in a controlled, legal, and ethical environment, such as a lab setup or with explicit permission to use this tool on any system.
-
 
 ### Testing Information 🧪
 All tests and exploitation workflows in **Nemesys** were conducted in a controlled environment using **Metasploitable Ubuntu**, a deliberately vulnerable machine designed for security testing and training. This testing was carried out in a dedicated **lab environment** to ensure ethical use and avoid unauthorized access to any external systems. The results of these tests demonstrate the tool’s effectiveness in identifying and exploiting vulnerabilities in a controlled, safe, and legal environment.
@@ -22,6 +19,18 @@ All tests and exploitation workflows in **Nemesys** were conducted in a controll
 <p align="center">
   <img src="doc/screenshots/picture_1.PNG" />
 </p>
+
+## ⚠️ Disclaimer  
+
+**Nemesys** has been developed **solely for educational and research purposes** as part of my learning process in **cybersecurity, pentesting, and post-exploitation automation**. This project was created to **practice the knowledge acquired during a cybersecurity course**, experiment with advanced techniques in a **controlled lab environment**, and add it to my **portfolio of cybersecurity projects**.  
+
+This tool is designed **exclusively for ethical hacking and authorized security assessments**. Its use **must be strictly limited to environments where explicit permission has been granted**, such as testing labs, cybersecurity training, or approved security audits.  
+
+**Unauthorized use of this tool on external systems is strictly prohibited** and may violate laws.  
+
+**I disclaim any responsibility for improper use of this tool.** **Always act within legal and ethical boundaries, and obtain proper authorization before conducting any security testing.**
+
+All tests and exploitation workflows in **Nemesys** were conducted in a controlled environment using **Metasploitable Ubuntu**, a deliberately vulnerable machine designed for security testing and training. This testing was carried out in a dedicated **lab environment** to ensure ethical use and avoid unauthorized access to any external systems. The results of these tests demonstrate the tool’s effectiveness in identifying and exploiting vulnerabilities in a controlled, safe, and legal environment.
 
 ## More Details 📝
 
@@ -38,7 +47,7 @@ If you're passionate about ethical hacking and want to elevate your cybersecurit
 - [🔐 **DecryptX**](https://github.com/sergio11/decryptx): An **advanced hash and password security assessment tool** that empowers you to analyze **password hashes**, **encrypted ZIP files**, and more. Ideal for evaluating the strength of encryption and identifying weaknesses in **security implementations**.
 - [ 🌑 **EclipseRecon**](https://github.com/sergio11/eclipserecon): is a stealthy web reconnaissance tool for uncovering hidden vulnerabilities, subdomains, and site structures. 🕵️‍♂️🔍 It empowers security professionals to identify critical attack surfaces with precision, ensuring proactive defense. 🚨💻
 - [ 🌐 **ZoneGuardian**](https://github.com/sergio11/zoneguardian): A powerful tool to analyze DNS configurations, detect vulnerabilities, and generate actionable security reports. 🔒🚀 Safeguard your digital assets with precision and ease!
-- [🔍 **Retrospect**](https://github.com/sergio11/retrospect): A cutting-edge **reconnaissance and security analysis tool** that retrieves and analyzes historical web snapshots, helping you uncover past vulnerabilities and misconfigurations before they can be exploited today. Ideal for **ethical hackers** and **digital forensics experts**.
+- **Retrospect**: A cutting-edge **reconnaissance and security analysis tool** that retrieves and analyzes historical web snapshots, helping you uncover past vulnerabilities and misconfigurations before they can be exploited today. Ideal for **ethical hackers** and **digital forensics experts**.
 
 These tools are designed to streamline penetration testing, enhance security assessments, and provide in-depth insights into vulnerabilities. Explore them to level up your ethical hacking skills! 💻🔍
 
@@ -341,13 +350,17 @@ This command will perform the exploit and create a reverse shell without attempt
 - Ensure that the specified network range is appropriate for your nemesys setup.
 
 
-## ⚠️ Disclaimer
-**Nemesys is designed as a learning and training tool** for applying Artificial Intelligence (AI) in the field of cybersecurity. Its primary purpose is to automate the process of generating detailed security reports based on system enumeration and vulnerability analysis. **Nemesys is intended for ethical and authorized use only**. Unauthorized use may result in severe legal consequences. Always ensure that you have proper authorization and are conducting your activities in a controlled, legal, and ethical environment, such as a lab setup or with explicit permission to use this tool on any system.
+## ⚠️ Disclaimer  
+
+**Nemesys** has been developed **solely for educational and research purposes** as part of my learning process in **cybersecurity, pentesting, and post-exploitation automation**. This project was created to **practice the knowledge acquired during a cybersecurity course**, experiment with advanced techniques in a **controlled lab environment**, and add it to my **portfolio of cybersecurity projects**.  
+
+This tool is designed **exclusively for ethical hacking and authorized security assessments**. Its use **must be strictly limited to environments where explicit permission has been granted**, such as testing labs, cybersecurity training, or approved security audits.  
+
+**Unauthorized use of this tool on external systems is strictly prohibited** and may violate laws.  
+
+**I disclaim any responsibility for improper use of this tool.** **Always act within legal and ethical boundaries, and obtain proper authorization before conducting any security testing.**
 
 All tests and exploitation workflows in **Nemesys** were conducted in a controlled environment using **Metasploitable Ubuntu**, a deliberately vulnerable machine designed for security testing and training. This testing was carried out in a dedicated **lab environment** to ensure ethical use and avoid unauthorized access to any external systems. The results of these tests demonstrate the tool’s effectiveness in identifying and exploiting vulnerabilities in a controlled, safe, and legal environment.
-
-## 🛡️ Legal
-The author of Nemesys is not responsible for any misuse or damage caused by this tool. Use responsibly and comply with all local laws.
 
 ## Acknowledgements 🙏
 
