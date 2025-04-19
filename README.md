@@ -35,21 +35,6 @@ All tests and exploitation workflows in **Nemesys** were conducted in a controll
 
 For a deeper dive into the concepts and development of this project, I invite you to read my [Medium article](https://sanchezsanchezsergio418.medium.com/harnessing-generative-ai-for-post-exploitation-vulnerability-reporting-in-cybersecurity-a-5ba3e53958ec), where I explore the integration of AI into cybersecurity and how it aids in vulnerability discovery and reporting.
 
-## 🌟 Explore My Other Open-Source Ethical Hacking Tools
-
-If you're interested in expanding your knowledge and skills in ethical hacking, I encourage you to check out my other open-source projects. These tools are part of my personal journey in learning and applying cybersecurity concepts, and they aim to streamline the process of vulnerability discovery and security assessment. Here's a selection of my projects that you can explore:
-
-- [🦅 **NetHawk**](https://github.com/sergio11/nethawk_analyzer): An **AI-powered ethical hacking tool** for **network vulnerability assessment**. Built with powerful tools like **Scapy** and **Nmap**, NetHawk automates key tasks like **port scanning**, **vulnerability detection**, and **report generation**, providing insights to help you strengthen network defenses.
-- [💀 **Nemesys**](https://github.com/sergio11/nemesys): A **post-exploitation tool** built on the **Metasploit Framework**. It automates the process of discovering critical system vulnerabilities and conducting data harvesting, focusing on enhancing the assessment of security gaps.
-- [🕷️ **BlackVenom**](https://github.com/sergio11/blackvenom): A tool for **ARP** and **DNS spoofing**, designed to intercept network traffic and uncover hidden vulnerabilities with precision.
-- [🌐 **ZeroTrace**](https://github.com/sergio11/zero_trace_hacking_tool): A **search engine dorking** tool for identifying **attack vectors** and uncovering **exposed sensitive information** across the internet.
-- 🔐 **DecryptX**: A tool for **hash and password security analysis**, ideal for assessing the strength of **encrypted data** and identifying weaknesses in **security implementations**.
-- [ 🌑 **EclipseRecon**](https://github.com/sergio11/eclipserecon): A web reconnaissance tool to identify **hidden vulnerabilities**, **subdomains**, and **site structures**, helping professionals understand critical attack surfaces and improve defenses.
-- **ZoneGuardian**: A tool for analyzing **DNS configurations**, detecting vulnerabilities, and generating security reports to protect digital assets.
-- **Retrospect**: A tool for **historical web analysis**, helping uncover past vulnerabilities and misconfigurations that could still be exploited today.
-
-These tools were developed as part of my personal learning process in cybersecurity, aiming to simplify penetration testing, enhance vulnerability assessments, and offer deeper insights into security flaws. Use them to deepen your understanding of network security and strengthen your ethical hacking skills! 💻🔍
-
 ## 🚀✨ Key Features
 
 - 🔍 **Automated Vulnerability Discovery**: Easily identify vulnerabilities by automating exploitation tasks with Metasploit, allowing for efficient system analysis and vulnerability reporting.
